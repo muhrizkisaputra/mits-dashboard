@@ -793,17 +793,33 @@ const PROJECTS = {
 };
 
 // ===================== SECTION LOADER =====================
-// Fetch semua section per project, detect Sparepart & Antrian by name
+// Hardcoded section GIDs (verified dari API 2026-07-16)
+// + fallback name-matching untuk project baru
 async function loadProjectSections() {
+  // Hardcoded Sparepart GIDs
+  [
+    '1213025318003787', // Palembang: Sparepart Needed
+    '1209041856391183', // Depok: Nunggu Sparepart
+    '1211808205852895', // Lampung: Sparepart Needed
+    '1213292192496055', // Bekasi: SPAREPART NEEDED
+  ].forEach(g => SPAREPART_GIDS.add(g));
+
+  // Hardcoded Antrian/Belum Dikerjakan GIDs
+  [
+    '1212822719311466', // Depok: CHECK IN
+    '1216547376350804', // Palembang: Untitled section (intake)
+  ].forEach(g => ANTRIAN_GIDS.add(g));
+
+  // Fallback: scan project baru yang tidak ada di daftar hardcoded
   for (const pgid of Object.keys(PROJECTS)) {
     try {
       const d = await apiFetch(`${API}/projects/${pgid}/sections?opt_fields=gid,name`);
       for (const s of (d.data || [])) {
         const n = s.name.toLowerCase();
-        if (n.includes('spare') || n.includes('menunggu part')) SPAREPART_GIDS.add(s.gid);
-        if (n.includes('antrian') || n.includes('belum') || n.includes('queue')) ANTRIAN_GIDS.add(s.gid);
+        if (n.includes('spare') || n.includes('nunggu sp')) SPAREPART_GIDS.add(s.gid);
+        if (n.includes('check in') || n.includes('antrian') || n.includes('queue') || n.includes('masuk')) ANTRIAN_GIDS.add(s.gid);
       }
-    } catch(e) { /* ignore per-project error */ }
+    } catch(e) { /* ignore */ }
   }
 }
 
