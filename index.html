@@ -1692,7 +1692,9 @@ async function init() {
     // completedPeriod = kumulatif dari firstM s/d end date
     const completedOnDay  = allTasks.filter(t => t.completed && isoToLocalDate(t.completed_at) === dfd.to);
     const completedPeriod = allTasks.filter(t => t.completed && isoToLocalDate(t.completed_at) >= dfd.from && isoToLocalDate(t.completed_at) <= dfd.to);
-    const newPeriod       = allTasks.filter(t => !t.parent && isoToLocalDate(t.created_at) >= dfd.from && isoToLocalDate(t.created_at) <= dfd.to);
+    // newPeriod selalu hari ini saja (bukan range period) — section ini khusus task masuk hari ini
+    const _today          = todayStr();
+    const newPeriod       = allTasks.filter(t => !t.parent && isoToLocalDate(t.created_at) === _today);
     const completed6mo    = allTasks.filter(t => t.completed && isoToLocalDate(t.completed_at) >= sixAgo);
 
     // Days in selected range (for avg calculation)
