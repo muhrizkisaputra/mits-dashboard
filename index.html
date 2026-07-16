@@ -589,6 +589,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         </div>
         <p style="font-size:11px;color:#aaa;margin-bottom:14px;">Klik baris teknisi untuk melihat detail lengkap.</p>
 
+        <!-- Sparepart per Cabang -->
+        <div style="margin-bottom:10px;">
+          <div style="font-size:11px;font-weight:700;color:#e65100;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">🔧 Sparepart Belum Dipesan — per Cabang</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #e65100;background:#fff8f5;">
+              <div class="stat-lbl" style="color:#e65100;">Palembang</div>
+              <div class="stat-val" style="color:#e65100;" id="mSpPlb">⏳</div>
+              <div class="stat-sub">task menunggu sparepart</div>
+            </div>
+            <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #e65100;background:#fff8f5;">
+              <div class="stat-lbl" style="color:#e65100;">Depok</div>
+              <div class="stat-val" style="color:#e65100;" id="mSpDpk">⏳</div>
+              <div class="stat-sub">task menunggu sparepart</div>
+            </div>
+            <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #e65100;background:#fff8f5;">
+              <div class="stat-lbl" style="color:#e65100;">Lampung</div>
+              <div class="stat-val" style="color:#e65100;" id="mSpLpg">⏳</div>
+              <div class="stat-sub">task menunggu sparepart</div>
+            </div>
+            <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #e65100;background:#fff8f5;">
+              <div class="stat-lbl" style="color:#e65100;">Bekasi</div>
+              <div class="stat-val" style="color:#e65100;" id="mSpBks">⏳</div>
+              <div class="stat-sub">task menunggu sparepart</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Top Alert Metrics: task tanpa teknisi & tanpa deadline -->
         <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
           <div class="stat c-red" style="flex:1;min-width:150px;margin:0;">
@@ -845,6 +872,37 @@ async function countProjectIssues() {
   const e2 = document.getElementById('mNoDeadline');
   if (e1) e1.textContent = noAssignee;
   if (e2) e2.textContent = noDeadline;
+}
+
+// Count task sparepart per cabang (section Sparepart Needed masing-masing project)
+async function countSparepartPerCabang() {
+  const cabang = [
+    { id: 'mSpPlb', secGid: '1213025318003787', label: 'Palembang' },
+    { id: 'mSpDpk', secGid: '1209041856391183', label: 'Depok'     },
+    { id: 'mSpLpg', secGid: '1211808205852895', label: 'Lampung'   },
+    { id: 'mSpBks', secGid: '1213292192496055', label: 'Bekasi'    },
+  ];
+  await Promise.allSettled(cabang.map(async c => {
+    try {
+      let url = `${API}/tasks?section=${c.secGid}&opt_fields=gid,completed,parent.gid&limit=100`;
+      let count = 0, pages = 0;
+      while (url && pages < 10) {
+        const d = await apiFetch(url);
+        for (const t of (d.data || [])) {
+          if (t.completed) continue;
+          if (t.parent && t.parent.gid) continue;
+          count++;
+        }
+        url = d.next_page?.uri || null;
+        pages++;
+      }
+      const el = document.getElementById(c.id);
+      if (el) el.textContent = count;
+    } catch(e) {
+      const el = document.getElementById(c.id);
+      if (el) el.textContent = '—';
+    }
+  }));
 }
 
 // ===================== DYNAMIC TEKNISI LOADER =====================
@@ -1118,6 +1176,7 @@ async function enterBoard() {
   loadOverview();
   // Hitung task tanpa assignee & tanpa deadline (background, tidak blocking)
   countProjectIssues();
+  countSparepartPerCabang();
 }
 
 function backToLanding() {
