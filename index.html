@@ -51,7 +51,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .logo-box.sm{padding:5px 8px;border-radius:6px;}
 /* M, T, S letters */
 .logo-l{font-family:'Arial Black','Franklin Gothic Heavy',Impact,sans-serif;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.5px;}
-/* i wrapper — position:relative so dot can be absolutely placed */
+/* i wrapper â position:relative so dot can be absolutely placed */
 .logo-i{font-family:'Arial Black','Franklin Gothic Heavy',Impact,sans-serif;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.5px;position:relative;display:inline-block;}
 .logo-i-dot{position:absolute;background:#F5C518;border-radius:2px;left:50%;transform:translateX(-50%);top:3%;width:68%;height:20%;}
 
@@ -104,10 +104,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  /* ── Layout ── */
+  /* ââ Layout ââ */
   .app { grid-template-columns: 1fr !important; }
 
-  /* ── Sidebar: slide-in overlay ── */
+  /* ââ Sidebar: slide-in overlay ââ */
   .sidebar {
     position: fixed !important; left: -260px !important; top: 0 !important; bottom: 0 !important;
     width: 260px !important; z-index: 200;
@@ -119,16 +119,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   .sb-overlay.open { display: block; }
   .ham-btn { display: flex; flex-direction: column; justify-content: center; }
 
-  /* ── Topbar ── */
+  /* ââ Topbar ââ */
   .topbar { padding: 10px 14px; gap: 8px; flex-wrap: nowrap; }
   .topbar-title { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .date-lbl { display: none; }
   .tbtn { padding: 5px 10px; font-size: 11px; }
 
-  /* ── Content ── */
+  /* ââ Content ââ */
   .content { padding: 12px; }
 
-  /* ── Landing page ── */
+  /* ââ Landing page ââ */
   .ld-top { padding: 14px 16px; }
   .ld-center { padding: 16px 16px 8px; }
   .ld-title { font-size: 22px; }
@@ -141,13 +141,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   .ld-card-desc { font-size: 11px; }
   #ldLogoCenter { display: none !important; }
 
-  /* ── Score + Stats ── */
+  /* ââ Score + Stats ââ */
   .score-wrap { grid-template-columns: 1fr !important; gap: 10px; }
   .score-box { min-height: 100px; padding: 16px; flex-direction: row; justify-content: flex-start; gap: 14px; text-align: left; }
   .score-pct { font-size: 36px; }
   .score-name { font-size: 12px; }
 
-  /* ── Stat grids ── */
+  /* ââ Stat grids ââ */
   .g4 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
   .g3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
   .g2 { grid-template-columns: 1fr !important; gap: 10px; }
@@ -157,10 +157,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   .stat-lbl { font-size: 8px; }
   .stat-sub { font-size: 9px; }
 
-  /* ── Charts ── */
+  /* ââ Charts ââ */
   .chart-wrap { height: 140px; }
 
-  /* ── Overview table: card style on mobile ── */
+  /* ââ Overview table: card style on mobile ââ */
   .ov-table thead { display: none; }
   .ov-table, .ov-table tbody, .ov-table tr, .ov-table td { display: block; width: 100%; }
   .ov-table tr {
@@ -172,38 +172,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   .ov-table td { border: none; padding: 0; font-size: 12px; }
   .ov-table td:first-child { width: 100%; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
   .ov-table td:nth-child(2)::before { content: 'Total: '; font-size: 10px; color: #aaa; }
-  .ov-table td:nth-child(3)::before { content: '✅ '; }
-  .ov-table td:nth-child(4)::before { content: '⏳ '; }
+  .ov-table td:nth-child(3)::before { content: 'â '; }
+  .ov-table td:nth-child(4)::before { content: 'â³ '; }
   .ov-table td:nth-child(5)::before { content: 'Rate: '; font-size: 10px; color: #aaa; }
   .ov-table td:nth-child(n+2) { display: inline-flex; align-items: center; gap: 3px; background: #f8f8f8; border-radius: 6px; padding: 3px 8px; font-size: 11px; }
   .ov-table td:last-child { background: transparent; padding: 0; }
 
-  /* ── Cards (task lists) ── */
+  /* ââ Cards (task lists) ââ */
   .card { padding: 14px; border-radius: 12px; }
   .card-title { font-size: 11px; }
 
-  /* ── Section header ── */
+  /* ââ Section header ââ */
   .section-hdr { font-size: 13px; }
 
-  /* ── Urgent section ── */
+  /* ââ Urgent section ââ */
   .urgent-row { flex-wrap: wrap; }
   .urgent-who { width: 100%; text-align: right; margin-top: 2px; }
   .urgent-meta { font-size: 10px; white-space: normal; }
 
-  /* ── Pager ── */
+  /* ââ Pager ââ */
   .pager button { padding: 5px 10px; font-size: 10px; }
   .pager-info { font-size: 10px; }
 
-  /* ── KPI pill ── */
+  /* ââ KPI pill ââ */
   .kpi-pill { font-size: 10px; padding: 3px 8px; }
 
-  /* ── Oldest grid ── */
+  /* ââ Oldest grid ââ */
   .g5 .oldest-cell { border-radius: 8px; }
 
-  /* ── Profile sidebar ── */
+  /* ââ Profile sidebar ââ */
   .sb-profile { padding: 14px; }
   .sb-avatar { width: 56px; height: 56px; font-size: 18px; }
-  /* ── Detail header on mobile ── */
+  /* ââ Detail header on mobile ââ */
   #detailHdr { padding: 12px 14px !important; gap: 12px !important; }
   #detailAvatar { width: 52px !important; height: 52px !important; font-size: 18px !important; }
   #detailName { font-size: 17px !important; }
@@ -420,14 +420,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div style="font-size:10px;color:#aaa;letter-spacing:2px;text-transform:uppercase;">IT Solutions Center.</div>
     </div>
     <h2>Setup Pertama Kali</h2>
-    <p style="font-size:13px;color:#666;">Paste Personal Access Token Asana kamu.<br>Akan disimpan otomatis — tidak perlu diulang.</p>
+    <p style="font-size:13px;color:#666;">Paste Personal Access Token Asana kamu.<br>Akan disimpan otomatis â tidak perlu diulang.</p>
     <div class="tk-err" id="tokenError"></div>
     <input class="tk-input" id="tokenInput" type="password" placeholder="Paste token Asana di sini...">
     <div id="wsWrapper">
       <label>Pilih Workspace</label>
       <select id="wsSelect" class="tk-input" style="margin-bottom:0;cursor:pointer;"></select>
     </div>
-    <button class="tk-btn" id="tokenBtn" onclick="handleLogin()">Simpan & Masuk →</button>
+    <button class="tk-btn" id="tokenBtn" onclick="handleLogin()">Simpan & Masuk â</button>
     <div class="tk-hint">
       Token didapat di <a href="https://app.asana.com/0/my-apps" target="_blank">app.asana.com/0/my-apps</a><br>
       Tersimpan di browser. Tidak dikirim ke server manapun.
@@ -449,7 +449,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div id="ldLogoFallback" style="display:none;align-items:baseline;background:#2B7869;border-radius:6px;padding:5px 9px;">
       <span class="logo-l" style="font-size:20px;">M</span><span class="logo-i" style="font-size:20px;"><span class="logo-i-dot"></span>i</span><span class="logo-l" style="font-size:20px;">TS</span>
     </div>
-    <span style="font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px;">v1.0 · Internal Only</span>
+    <span style="font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.5px;">v1.0 Â· Internal Only</span>
   </div>
 
   <!-- Center hero -->
@@ -469,36 +469,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
   <!-- Cards -->
   <div class="ld-cards">
-    <!-- 01 Technision Board — LIVE -->
+    <!-- 01 Technision Board â LIVE -->
     <div class="ld-card available" onclick="enterBoard()">
       <div class="card-glow"></div>
-      <span class="ld-badge badge-live">● LIVE</span>
+      <span class="ld-badge badge-live">â LIVE</span>
       <div class="ld-card-num">01</div>
-      <span class="ld-card-icon">🛠️</span>
+      <span class="ld-card-icon">ð ï¸</span>
       <div class="ld-card-title">Technision Board</div>
-      <div class="ld-card-desc">Monitoring harian teknisi — task selesai, pending, KPI score, overdue, grafik performa bulan ini dan 6 bulan terakhir.</div>
+      <div class="ld-card-desc">Monitoring harian teknisi â task selesai, pending, KPI score, overdue, grafik performa bulan ini dan 6 bulan terakhir.</div>
     </div>
 
-    <!-- 02 Finance Traction — SOON -->
+    <!-- 02 Finance Traction â SOON -->
     <div class="ld-card disabled">
       <span class="ld-badge badge-soon">COMING SOON</span>
       <div class="ld-card-num">02</div>
-      <span class="ld-card-icon">💰</span>
+      <span class="ld-card-icon">ð°</span>
       <div class="ld-card-title">Finance Traction</div>
-      <div class="ld-card-desc">Pencatatan dan analisis keuangan operasional — pemasukan, pengeluaran, dan margin per cabang.</div>
+      <div class="ld-card-desc">Pencatatan dan analisis keuangan operasional â pemasukan, pengeluaran, dan margin per cabang.</div>
     </div>
 
-    <!-- 03 KPI Performance Report — SOON -->
+    <!-- 03 KPI Performance Report â SOON -->
     <div class="ld-card disabled">
       <span class="ld-badge badge-soon">COMING SOON</span>
       <div class="ld-card-num">03</div>
-      <span class="ld-card-icon">📈</span>
+      <span class="ld-card-icon">ð</span>
       <div class="ld-card-title">KPI Performance Report</div>
-      <div class="ld-card-desc">Laporan performa KPI keseluruhan tim — target vs aktual, ranking teknisi, dan analisis tren bulanan.</div>
+      <div class="ld-card-desc">Laporan performa KPI keseluruhan tim â target vs aktual, ranking teknisi, dan analisis tren bulanan.</div>
     </div>
   </div>
 
-  <div class="ld-footer">© 2026 MITS Solution · Marco IT · PT Matra Digital Group</div>
+  <div class="ld-footer">Â© 2026 MITS Solution Â· Marco IT Â· PT Matra Digital Group</div>
 </div>
 
 <!-- ===== DASHBOARD ===== -->
@@ -528,7 +528,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="sb-section">
       <div class="sb-sec-lbl">Menu</div>
       <button class="sb-btn active" id="btnOverview" onclick="showView('overview')">
-        <span class="sb-btn-avatar" style="background:#1B4D3E;font-size:14px;">📊</span>
+        <span class="sb-btn-avatar" style="background:#1B4D3E;font-size:14px;">ð</span>
         <span class="sb-btn-info"><span class="sb-btn-name">Dashboard Semua</span><span class="sb-btn-branch">Overview Teknisi</span></span>
       </button>
     </div>
@@ -542,10 +542,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <select id="selCabang" style="display:none"></select>
 
     <div class="sb-footer">
-      <div style="font-size:9px;color:rgba(255,255,255,.3);margin-bottom:8px;text-align:center;" id="dateLbl">—</div>
-      <button class="sb-logout" id="refreshBtn" onclick="init()">🔄 Refresh Data</button>
-      <button class="sb-logout" onclick="loadDynamicTeknisi()" style="margin-top:6px;background:rgba(255,255,255,.08);">↺ Sync Teknisi</button>
-      <button class="sb-logout" onclick="logout()" style="margin-top:6px;">🔓 Ganti Token</button>
+      <div style="font-size:9px;color:rgba(255,255,255,.3);margin-bottom:8px;text-align:center;" id="dateLbl">â</div>
+      <button class="sb-logout" id="refreshBtn" onclick="init()">ð Refresh Data</button>
+      <button class="sb-logout" onclick="loadDynamicTeknisi()" style="margin-top:6px;background:rgba(255,255,255,.08);">âº Sync Teknisi</button>
+      <button class="sb-logout" onclick="logout()" style="margin-top:6px;">ð Ganti Token</button>
     </div>
   </aside>
 
@@ -562,8 +562,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <button class="ham-btn" onclick="toggleSidebar()" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
-      <button class="tbtn" onclick="backToLanding()" style="padding:5px 10px;font-size:11px;color:#888;">← Home</button>
-      <div class="topbar-title" style="font-size:13px;">🛠️ Technision Board — MITS Solution</div>
+      <button class="tbtn" onclick="backToLanding()" style="padding:5px 10px;font-size:11px;color:#888;">â Home</button>
+      <div class="topbar-title" style="font-size:13px;">ð ï¸ Technision Board â MITS Solution</div>
     </div>
 
     <div class="content">
@@ -571,15 +571,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <!-- ===== VIEW: OVERVIEW ===== -->
       <div id="viewOverview">
         <div class="section-hdr">
-          👥 Overview Semua Teknisi
-          <span class="badge green" id="ovMonth">—</span>
+          ð¥ Overview Semua Teknisi
+          <span class="badge green" id="ovMonth">â</span>
         </div>
         <!-- Date Filter Bar -->
         <div class="date-filter-bar" id="ovFilterBar">
           <button class="df-btn" data-mode="today" onclick="setDateFilter('today')">Hari Ini</button>
           <button class="df-btn" data-mode="yesterday" onclick="setDateFilter('yesterday')">Kemarin</button>
           <button class="df-btn active" data-mode="month" onclick="setDateFilter('month')">Bulan Ini</button>
-          <button class="df-btn" data-mode="range" onclick="setDateFilter('range')">📅 Pilih Rentang</button>
+          <button class="df-btn" data-mode="range" onclick="setDateFilter('range')">ð Pilih Rentang</button>
           <div class="df-range-wrap" id="dfRange" style="display:none;">
             <input type="date" id="dfFrom" />
             <span>s/d</span>
@@ -591,26 +591,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
         <!-- Sparepart per Cabang -->
         <div style="margin-bottom:10px;">
-          <div style="font-size:11px;font-weight:700;color:#e65100;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">🔧 Sparepart Belum Dipesan — per Cabang</div>
+          <div style="font-size:11px;font-weight:700;color:#e65100;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">ð§ Sparepart Belum Dipesan â per Cabang</div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #e65100;background:#fff8f5;">
               <div class="stat-lbl" style="color:#e65100;">Palembang</div>
-              <div class="stat-val" style="color:#e65100;" id="mSpPlb">⏳</div>
+              <div class="stat-val" style="color:#e65100;" id="mSpPlb">â³</div>
               <div class="stat-sub">task menunggu sparepart</div>
             </div>
             <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #e65100;background:#fff8f5;">
               <div class="stat-lbl" style="color:#e65100;">Depok</div>
-              <div class="stat-val" style="color:#e65100;" id="mSpDpk">⏳</div>
+              <div class="stat-val" style="color:#e65100;" id="mSpDpk">â³</div>
               <div class="stat-sub">task menunggu sparepart</div>
             </div>
             <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #e65100;background:#fff8f5;">
               <div class="stat-lbl" style="color:#e65100;">Lampung</div>
-              <div class="stat-val" style="color:#e65100;" id="mSpLpg">⏳</div>
+              <div class="stat-val" style="color:#e65100;" id="mSpLpg">â³</div>
               <div class="stat-sub">task menunggu sparepart</div>
             </div>
             <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #e65100;background:#fff8f5;">
               <div class="stat-lbl" style="color:#e65100;">Bekasi</div>
-              <div class="stat-val" style="color:#e65100;" id="mSpBks">⏳</div>
+              <div class="stat-val" style="color:#e65100;" id="mSpBks">â³</div>
               <div class="stat-sub">task menunggu sparepart</div>
             </div>
           </div>
@@ -619,13 +619,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <!-- Top Alert Metrics: task tanpa teknisi & tanpa deadline -->
         <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
           <div class="stat c-red" style="flex:1;min-width:150px;margin:0;">
-            <div class="stat-lbl">⚠️ Tanpa Teknisi</div>
-            <div class="stat-val red" id="mNoAssignee">⏳</div>
+            <div class="stat-lbl">â ï¸ Tanpa Teknisi</div>
+            <div class="stat-val red" id="mNoAssignee">â³</div>
             <div class="stat-sub">task aktif belum di-assign</div>
           </div>
           <div class="stat c-orange" style="flex:1;min-width:150px;margin:0;">
-            <div class="stat-lbl">📅 Tanpa Deadline</div>
-            <div class="stat-val orange" id="mNoDeadline">⏳</div>
+            <div class="stat-lbl">ð Tanpa Deadline</div>
+            <div class="stat-val orange" id="mNoDeadline">â³</div>
             <div class="stat-sub">task aktif tanpa tanggal</div>
           </div>
         </div>
@@ -638,8 +638,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
               <th>Total Task</th>
               <th>Selesai</th>
               <th>Pending</th>
-              <th>🔧 Sparepart</th>
-              <th>⏳ Belum Dikerjakan</th>
+              <th>ð§ Sparepart</th>
+              <th>â³ Belum Dikerjakan</th>
               <th>Task Rate</th>
               <th>KPI Score</th>
             </tr>
@@ -654,11 +654,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div id="ovUrgent" style="display:none;margin-top:28px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
             <div style="background:#c62828;color:#fff;font-size:13px;font-weight:800;padding:7px 16px;border-radius:8px;letter-spacing:.3px;animation:pulse-ring 1.5s ease-in-out infinite;">
-              🚨 SEGERA KERJAKAN !!!
+              ð¨ SEGERA KERJAKAN !!!
             </div>
             <span id="urgentCount" style="font-size:12px;color:#c62828;font-weight:700;"></span>
           </div>
-          <p style="font-size:11px;color:#999;margin-bottom:12px;">Task overdue yang <b>tidak ada update/comment hari ini</b> — teknisi wajib update progress setiap hari.</p>
+          <p style="font-size:11px;color:#999;margin-bottom:12px;">Task overdue yang <b>tidak ada update/comment hari ini</b> â teknisi wajib update progress setiap hari.</p>
           <div id="urgentList"></div>
           <div id="urgentPager"></div>
         </div>
@@ -684,7 +684,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <button class="df-btn active" data-dmode="today" onclick="setDetailFilter('today')">Hari Ini</button>
         <button class="df-btn" data-dmode="yesterday" onclick="setDetailFilter('yesterday')">Kemarin</button>
         <button class="df-btn" data-dmode="month" onclick="setDetailFilter('month')">Bulan Ini</button>
-        <button class="df-btn" data-dmode="range" onclick="setDetailFilter('range')">📅 Pilih Rentang</button>
+        <button class="df-btn" data-dmode="range" onclick="setDetailFilter('range')">ð Pilih Rentang</button>
         <div class="df-range-wrap" id="dfRangeDetail" style="display:none;">
           <input type="date" id="dfDetailFrom" />
           <span>s/d</span>
@@ -697,40 +697,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="score-wrap">
         <div class="score-box" id="scoreBox" style="background:#f5f5f5">
           <div class="score-lbl">Nilai Score <span style="font-weight:400;opacity:.6">/ 100</span></div>
-          <div class="score-pct" id="scorePct" style="color:#999">—</div>
-          <div class="score-name" id="scoreName" style="color:#999">—</div>
-          <div class="score-month" id="scoreMonth">—</div>
+          <div class="score-pct" id="scorePct" style="color:#999">â</div>
+          <div class="score-name" id="scoreName" style="color:#999">â</div>
+          <div class="score-month" id="scoreMonth">â</div>
           <div id="scoreKpi" style="margin-top:8px;font-size:10px;opacity:.75;line-height:1.8;display:none;text-align:left;border-top:1px solid rgba(0,0,0,.08);padding-top:6px;">
-            <div>① Completed (50%): <b id="scoreKpi1">—</b> / 100</div>
-            <div>② InTime (30%): <b id="scoreKpi2">—</b> / 100</div>
-            <div>③ Return (20%): <b id="scoreKpi3">100</b> / 100 <span style="opacity:.5;font-size:9px;">*</span></div>
+            <div>â  Completed (50%): <b id="scoreKpi1">â</b> / 100</div>
+            <div>â¡ InTime (30%): <b id="scoreKpi2">â</b> / 100</div>
+            <div>â¢ Return (20%): <b id="scoreKpi3">100</b> / 100 <span style="opacity:.5;font-size:9px;">*</span></div>
           </div>
         </div>
         <div class="g4" style="margin:0;align-content:start;">
-          <div class="stat c-red">  <div class="stat-lbl">Belum Selesai</div>  <div class="stat-val red"    id="dInc">—</div><div class="stat-sub">task aktif</div></div>
-          <div class="stat c-green"><div class="stat-lbl" id="lblDCom">Selesai Hari Ini</div><div class="stat-val green"  id="dCom">—</div><div class="stat-sub" id="subDCom">hari ini</div></div>
-          <div class="stat c-blue"> <div class="stat-lbl">Completion Rate</div> <div class="stat-val blue"   id="dRate">—</div><div class="stat-sub" id="subDRate">hari ini</div></div>
-          <div class="stat c-orange"><div class="stat-lbl">Task Baru Masuk</div><div class="stat-val orange" id="dNew">—</div><div class="stat-sub">hari ini</div></div>
+          <div class="stat c-red">  <div class="stat-lbl">Belum Selesai</div>  <div class="stat-val red"    id="dInc">â</div><div class="stat-sub">task aktif</div></div>
+          <div class="stat c-green"><div class="stat-lbl" id="lblDCom">Selesai Hari Ini</div><div class="stat-val green"  id="dCom">â</div><div class="stat-sub" id="subDCom">hari ini</div></div>
+          <div class="stat c-blue"> <div class="stat-lbl">Completion Rate</div> <div class="stat-val blue"   id="dRate">â</div><div class="stat-sub" id="subDRate">hari ini</div></div>
+          <div class="stat c-orange"><div class="stat-lbl">Task Baru Masuk</div><div class="stat-val orange" id="dNew">â</div><div class="stat-sub">hari ini</div></div>
         </div>
       </div>
 
       <!-- Monthly Summary -->
       <div class="g4" style="margin-bottom:14px;">
-        <div class="stat c-teal">  <div class="stat-lbl" id="lblMCom">Selesai Bulan Ini</div><div class="stat-val teal"   id="mCom">—</div><div class="stat-sub" id="subMCom">task</div></div>
-        <div class="stat c-red">   <div class="stat-lbl">Task Remaining</div>   <div class="stat-val red"    id="mRem">—</div><div class="stat-sub">belum selesai</div></div>
-        <div class="stat c-purple"><div class="stat-lbl">Rata-rata Harian</div> <div class="stat-val purple" id="mAvg">—</div><div class="stat-sub">task/hari</div></div>
-        <div class="stat c-orange"><div class="stat-lbl">Tidak Di-update</div>  <div class="stat-val orange" id="mStale">—</div><div class="stat-sub">overdue, belum update hari ini</div></div>
+        <div class="stat c-teal">  <div class="stat-lbl" id="lblMCom">Selesai Bulan Ini</div><div class="stat-val teal"   id="mCom">â</div><div class="stat-sub" id="subMCom">task</div></div>
+        <div class="stat c-red">   <div class="stat-lbl">Task Remaining</div>   <div class="stat-val red"    id="mRem">â</div><div class="stat-sub">belum selesai</div></div>
+        <div class="stat c-purple"><div class="stat-lbl">Rata-rata Harian</div> <div class="stat-val purple" id="mAvg">â</div><div class="stat-sub">task/hari</div></div>
+        <div class="stat c-orange"><div class="stat-lbl">Tidak Di-update</div>  <div class="stat-val orange" id="mStale">â</div><div class="stat-sub">overdue, belum update hari ini</div></div>
       </div>
       <!-- Section Metrics: Sparepart & Belum Dikerjakan -->
       <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
         <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #e65100;background:#fff8f5;">
-          <div class="stat-lbl" style="color:#e65100;">🔧 Menunggu Sparepart</div>
-          <div class="stat-val" style="color:#e65100;" id="dSparepart">—</div>
+          <div class="stat-lbl" style="color:#e65100;">ð§ Menunggu Sparepart</div>
+          <div class="stat-val" style="color:#e65100;" id="dSparepart">â</div>
           <div class="stat-sub">task di section sparepart</div>
         </div>
         <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #6a1b9a;background:#faf5ff;">
-          <div class="stat-lbl" style="color:#6a1b9a;">⏳ Belum Dikerjakan</div>
-          <div class="stat-val" style="color:#6a1b9a;" id="dAntrian">—</div>
+          <div class="stat-lbl" style="color:#6a1b9a;">â³ Belum Dikerjakan</div>
+          <div class="stat-val" style="color:#6a1b9a;" id="dAntrian">â</div>
           <div class="stat-sub">task di antrian</div>
         </div>
       </div>
@@ -738,11 +738,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <!-- Charts -->
       <div class="g2">
         <div class="card">
-          <div class="card-title">📅 Task Selesai — Hari ke Hari (Bulan Ini)</div>
+          <div class="card-title">ð Task Selesai â Hari ke Hari (Bulan Ini)</div>
           <div class="chart-wrap"><canvas id="chartDay"></canvas></div>
         </div>
         <div class="card">
-          <div class="card-title">📊 Task Rate Bulan ke Bulan (6 Bulan)</div>
+          <div class="card-title">ð Task Rate Bulan ke Bulan (6 Bulan)</div>
           <div class="chart-wrap"><canvas id="chartMonth"></canvas></div>
         </div>
       </div>
@@ -750,29 +750,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <!-- Issues -->
       <div class="g3">
         <div class="card">
-          <div class="card-title">⚠️ Selesai Terlambat <span class="badge2 red" id="lateBadge" style="font-size:15px;padding:3px 12px;font-weight:800;">0%</span></div>
-          <div id="lateArea"><div class="loading">⏳</div></div>
+          <div class="card-title">â ï¸ Selesai Terlambat <span class="badge2 red" id="lateBadge" style="font-size:15px;padding:3px 12px;font-weight:800;">0%</span></div>
+          <div id="lateArea"><div class="loading">â³</div></div>
         </div>
         <div class="card">
-          <div class="card-title">🚫 Overdue Tidak Di-update <span class="badge2 orange" id="overdBadge">0</span></div>
-          <div id="overdArea"><div class="loading">⏳</div></div>
+          <div class="card-title">ð« Overdue Tidak Di-update <span class="badge2 orange" id="overdBadge">0</span></div>
+          <div id="overdArea"><div class="loading">â³</div></div>
         </div>
         <div class="card">
-          <div class="card-title">🎯 Kerjakan Sekarang <span class="badge2 green">Priority</span></div>
-          <div id="recoArea"><div class="loading">⏳</div></div>
+          <div class="card-title">ð¯ Kerjakan Sekarang <span class="badge2 green">Priority</span></div>
+          <div id="recoArea"><div class="loading">â³</div></div>
         </div>
       </div>
 
       <!-- Oldest -->
       <div class="card">
-        <div class="card-title">⏳ Servisan Terlama Belum Dikerjakan</div>
-        <div id="oldestArea"><div class="loading">⏳</div></div>
+        <div class="card-title">â³ Servisan Terlama Belum Dikerjakan</div>
+        <div id="oldestArea"><div class="loading">â³</div></div>
       </div>
 
       <!-- New Today -->
       <div class="card">
-        <div class="card-title">🆕 Task Baru Masuk Hari Ini</div>
-        <div id="newArea"><div class="loading">⏳</div></div>
+        <div class="card-title">ð Task Baru Masuk Hari Ini</div>
+        <div id="newArea"><div class="loading">â³</div></div>
       </div>
 
       </div><!-- /viewDetail -->
@@ -793,7 +793,7 @@ localStorage.setItem('mits_workspace', _EW);
 let WORKSPACE = _EW;
 
 // Metadata display untuk teknisi yang dikenal (nama, warna, inisial, foto)
-// Branch TIDAK lagi hardcoded di sini — ditentukan dinamis dari project Asana
+// Branch TIDAK lagi hardcoded di sini â ditentukan dinamis dari project Asana
 const TEKNISI_META = {
   '1212208190334462': { name:'Arjun',         initials:'AR',  color:'#2980b9', photo:null },
   '1214029371427798': { name:'Dzaky',          initials:'DZ',  color:'#27ae60', photo:null },
@@ -850,19 +850,27 @@ async function loadProjectSections() {
   }
 }
 
+// Simpan daftar task untuk modal
+let _issueNoAssignee = [];
+let _issueNoDeadline = [];
+
 // Count tasks tanpa assignee & tanpa deadline di semua project (untuk top metrics)
 async function countProjectIssues() {
+  _issueNoAssignee = [];
+  _issueNoDeadline = [];
   let noAssignee = 0, noDeadline = 0;
   await Promise.allSettled(Object.keys(PROJECTS).map(async pgid => {
-    let url = `${API}/tasks?project=${pgid}&opt_fields=gid,assignee,due_on,completed,parent.gid&limit=100`;
+    const cabangName = PROJECTS[pgid] || pgid;
+    let url = `${API}/tasks?project=${pgid}&opt_fields=gid,name,assignee,due_on,completed,parent.gid&limit=100`;
     let pages = 0;
     while (url && pages < 20) {
       const d = await apiFetch(url);
       for (const t of (d.data || [])) {
         if (t.completed) continue;
         if (t.parent && t.parent.gid) continue; // skip subtask
-        if (!t.assignee) noAssignee++;
-        if (!t.due_on)   noDeadline++;
+        const item = { gid: t.gid, name: t.name, cabang: cabangName, projectGid: pgid, due_on: t.due_on };
+        if (!t.assignee) { noAssignee++; _issueNoAssignee.push(item); }
+        if (!t.due_on)   { noDeadline++; _issueNoDeadline.push(item); }
       }
       url = d.next_page?.uri || null;
       pages++;
@@ -872,6 +880,50 @@ async function countProjectIssues() {
   const e2 = document.getElementById('mNoDeadline');
   if (e1) e1.textContent = noAssignee;
   if (e2) e2.textContent = noDeadline;
+}
+
+// Tampilkan modal daftar task
+function showIssueModal(type) {
+  const modal = document.getElementById('issueModal');
+  const title = document.getElementById('issueModalTitle');
+  const sub   = document.getElementById('issueModalSub');
+  const hint  = document.getElementById('issueModalHint');
+  const body  = document.getElementById('issueModalBody');
+  const list  = type === 'assignee' ? _issueNoAssignee : _issueNoDeadline;
+  if (type === 'assignee') {
+    title.textContent = '\u26a0\ufe0f Task Tanpa Teknisi';
+    hint.textContent  = 'teknisi / assignee';
+  } else {
+    title.textContent = '\ud83d\udcc5 Task Tanpa Deadline';
+    hint.textContent  = 'tanggal deadline';
+  }
+  sub.textContent = list.length + ' task aktif ditemukan di semua cabang';
+  if (!list.length) {
+    body.innerHTML = '<div class="empty">\u2705 Tidak ada task ditemukan</div>';
+  } else {
+    const byCabang = {};
+    list.forEach(t => { if (!byCabang[t.cabang]) byCabang[t.cabang] = []; byCabang[t.cabang].push(t); });
+    body.innerHTML = Object.entries(byCabang).map(([cab, tasks]) =>
+      '<div style="margin-bottom:14px;">' +
+      '<div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--sb);padding:6px 0 4px;border-bottom:2px solid #e8f5ef;margin-bottom:6px;">' +
+      '\ud83d\udccd ' + cab + ' <span style="font-weight:400;opacity:.6;">(' + tasks.length + ' task)</span></div>' +
+      tasks.map(t => {
+        const u = 'https://app.asana.com/0/' + t.projectGid + '/' + t.gid + '/f';
+        return '<div style="display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid #f5f5f5;">' +
+          '<span style="font-size:10px;color:#ccc;width:20px;text-align:right;flex-shrink:0;">#</span>' +
+          '<a href="' + u + '" target="_blank" rel="noopener" style="flex:1;font-size:12px;font-weight:600;color:var(--txt);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="' + t.name.replace(/"/g,'&quot;') + '">' + t.name.replace(/</g,'&lt;') + '</a>' +
+          '<a href="' + u + '" target="_blank" rel="noopener" style="flex-shrink:0;font-size:10px;padding:3px 8px;background:#e8f0fe;color:#1565c0;border-radius:6px;text-decoration:none;font-weight:700;">Buka \u2197</a>' +
+          '</div>';
+      }).join('') + '</div>'
+    ).join('');
+  }
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeIssueModal() {
+  document.getElementById('issueModal').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 // Count task sparepart per cabang (section Sparepart Needed masing-masing project)
@@ -900,7 +952,7 @@ async function countSparepartPerCabang() {
       if (el) el.textContent = count;
     } catch(e) {
       const el = document.getElementById(c.id);
-      if (el) el.textContent = '—';
+      if (el) el.textContent = 'â';
     }
   }));
 }
@@ -944,7 +996,7 @@ async function fetchProjectAssignees(projectGid) {
 // Build TEKNISI_LIST dinamis dari semua project, lalu rebuild sidebar
 async function loadDynamicTeknisi() {
   const nav = document.getElementById('teknisiNav');
-  nav.innerHTML = '<div style="padding:12px 16px;color:rgba(255,255,255,.4);font-size:11px;">⏳ Memuat daftar teknisi...</div>';
+  nav.innerHTML = '<div style="padding:12px 16px;color:rgba(255,255,255,.4);font-size:11px;">â³ Memuat daftar teknisi...</div>';
 
   const projectEntries = Object.entries(PROJECTS);
   const results = await Promise.allSettled(
@@ -990,7 +1042,7 @@ const ACTIVE_SECTIONS = {
   '1213292192496049': null,
 };
 
-// Section GID sets — diisi otomatis saat startup berdasarkan nama section di Asana
+// Section GID sets â diisi otomatis saat startup berdasarkan nama section di Asana
 let SPAREPART_GIDS = new Set();
 let ANTRIAN_GIDS   = new Set();
 
@@ -1036,8 +1088,8 @@ function buildSidebar() {
     }).join('');
     return `<div class="sb-branch-group" id="bg-${branch.replace(/\s/g,'-')}">
       <div class="sb-branch-hdr" onclick="toggleBranch(this)">
-        <span class="sb-branch-hdr-lbl">📍 ${branch} (${members.length})</span>
-        <span class="sb-branch-hdr-arrow">▾</span>
+        <span class="sb-branch-hdr-lbl">ð ${branch} (${members.length})</span>
+        <span class="sb-branch-hdr-arrow">â¾</span>
       </div>
       <div class="sb-branch-members" style="max-height:${members.length*50}px">${memberHtml}</div>
     </div>`;
@@ -1126,7 +1178,7 @@ async function handleLogin() {
     const r = await fetch(`${API}/users/me?opt_fields=workspaces,workspaces.gid,workspaces.name`, {
       headers: { 'Authorization': `Bearer ${t}`, 'Accept': 'application/json' }
     });
-    if (!r.ok) throw new Error('Token tidak valid — pastikan token dari akun RM');
+    if (!r.ok) throw new Error('Token tidak valid â pastikan token dari akun RM');
     const data = await r.json();
     const ws = data.data && data.data.workspaces;
     if (!ws || !ws.length) throw new Error('Tidak ada workspace ditemukan');
@@ -1138,23 +1190,23 @@ async function handleLogin() {
     } else {
       document.getElementById('wsSelect').innerHTML = ws.map(w => `<option value="${w.gid}">${w.name||w.gid}</option>`).join('');
       wsWrapper.style.display = 'block';
-      btn.disabled = false; btn.textContent = 'Masuk →';
+      btn.disabled = false; btn.textContent = 'Masuk â';
     }
   } catch(e) {
     const el = document.getElementById('tokenError');
     el.textContent = e.message; el.style.display = 'block';
-    btn.disabled = false; btn.textContent = 'Cek Workspace →';
+    btn.disabled = false; btn.textContent = 'Cek Workspace â';
   }
 }
 
 function logout() {
-  // Token di-embed — cukup kembali ke landing
+  // Token di-embed â cukup kembali ke landing
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('landing').style.display = 'block';
 }
 
 function showDashboard() {
-  // After login → go to landing page first
+  // After login â go to landing page first
   document.getElementById('tokenScreen').style.display = 'none';
   document.getElementById('landing').style.display = 'block';
 }
@@ -1180,7 +1232,7 @@ async function enterBoard() {
 }
 
 function backToLanding() {
-  // Dashboard → back to landing
+  // Dashboard â back to landing
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('landing').style.display = 'block';
 }
@@ -1226,7 +1278,7 @@ const todayStr     = () => localDateStr();
 const firstOfMonth = () => { const d=new Date(); return localDateStr(new Date(d.getFullYear(),d.getMonth(),1)); };
 const sixMonthsAgo = () => { const d=new Date(); return localDateStr(new Date(d.getFullYear(),d.getMonth()-5,1)); };
 const daysSince    = iso => iso ? Math.floor((Date.now()-new Date(iso))/86400000) : null;
-const fmtDate      = iso => iso ? new Date(iso).toLocaleDateString('id-ID',{day:'2-digit',month:'short'}) : '—';
+const fmtDate      = iso => iso ? new Date(iso).toLocaleDateString('id-ID',{day:'2-digit',month:'short'}) : 'â';
 const tag = (txt,cls) => `<span class="tag ${cls}">${txt}</span>`;
 
 function tItem(n, name, meta) {
@@ -1240,10 +1292,10 @@ function tItem(n, name, meta) {
 }
 
 // ===================== SCORE =====================
-// KPI 1 — Completed Services : target 90% selesai, bobot 50
-// KPI 2 — InTime Service     : target 80% tepat waktu, bobot 30
-// KPI 3 — Return Services    : target 0 komplain, bobot 20 (tidak terlacak → penuh)
-// Score = (kpi1Score/100×50) + (kpi2Score/100×30) + (kpi3Score/100×20)  → maks 100
+// KPI 1 â Completed Services : target 90% selesai, bobot 50
+// KPI 2 â InTime Service     : target 80% tepat waktu, bobot 30
+// KPI 3 â Return Services    : target 0 komplain, bobot 20 (tidak terlacak â penuh)
+// Score = (kpi1Score/100Ã50) + (kpi2Score/100Ã30) + (kpi3Score/100Ã20)  â maks 100
 function getScore(done, remaining, late) {
   const total = done + remaining;
   if (!total) return { pct:0, kpi1:0, kpi2:0, kpi3:100, label:'Belum ada data', color:'#999', bg:'#f5f5f5' };
@@ -1258,19 +1310,19 @@ function getScore(done, remaining, late) {
   // KPI2: nilai 100 saat on-time >= 80%, proporsional di bawahnya
   const kpi2 = Math.min(100, Math.round(onTimeRate / 0.80 * 100));
 
-  // KPI3: Return Services — tidak bisa dilacak dari Asana, default 100
+  // KPI3: Return Services â tidak bisa dilacak dari Asana, default 100
   const kpi3 = 100;
 
   const pct = Math.round(kpi1 * 0.50 + kpi2 * 0.30 + kpi3 * 0.20);
 
-  if (pct >= 90) return { pct, kpi1, kpi2, kpi3, label:'Excellent 🏆',       color:'#1B4D3E', bg:'#e8f5e9' };
-  if (pct >= 75) return { pct, kpi1, kpi2, kpi3, label:'Baik 👍',            color:'#1565c0', bg:'#e3f2fd' };
-  if (pct >= 60) return { pct, kpi1, kpi2, kpi3, label:'Perlu Perbaikan ⚠️', color:'#d84315', bg:'#fff3e0' };
-  return               { pct, kpi1, kpi2, kpi3, label:'Perlu Evaluasi 🔴',  color:'#c62828', bg:'#ffebee' };
+  if (pct >= 90) return { pct, kpi1, kpi2, kpi3, label:'Excellent ð',       color:'#1B4D3E', bg:'#e8f5e9' };
+  if (pct >= 75) return { pct, kpi1, kpi2, kpi3, label:'Baik ð',            color:'#1565c0', bg:'#e3f2fd' };
+  if (pct >= 60) return { pct, kpi1, kpi2, kpi3, label:'Perlu Perbaikan â ï¸', color:'#d84315', bg:'#fff3e0' };
+  return               { pct, kpi1, kpi2, kpi3, label:'Perlu Evaluasi ð´',  color:'#c62828', bg:'#ffebee' };
 }
 
 function kpiPill(pct) {
-  if (!pct && pct !== 0) return `<span class="kpi-pill kpi-none">—</span>`;
+  if (!pct && pct !== 0) return `<span class="kpi-pill kpi-none">â</span>`;
   if (pct >= 90) return `<span class="kpi-pill kpi-excellent">${pct}% Excellent</span>`;
   if (pct >= 60) return `<span class="kpi-pill kpi-warn">${pct}% Belum Capai</span>`;
   return `<span class="kpi-pill kpi-danger">${pct}% Perlu Evaluasi</span>`;
@@ -1286,11 +1338,11 @@ function getFilterDates() {
   const monthName = new Date().toLocaleDateString('id-ID',{month:'long',year:'numeric'});
   switch(dateFilter.mode) {
     case 'today':
-      return { from: firstM, to: today, label: '1–' + fmtDate(today) };
+      return { from: firstM, to: today, label: '1â' + fmtDate(today) };
     case 'yesterday':
       return { from: firstM, to: yest, label: '1 s/d ' + fmtDate(yest) };
     case 'range':
-      return { from: dateFilter.from, to: dateFilter.to, label: fmtDate(dateFilter.from) + ' – ' + fmtDate(dateFilter.to) };
+      return { from: dateFilter.from, to: dateFilter.to, label: fmtDate(dateFilter.from) + ' â ' + fmtDate(dateFilter.to) };
     default:
       return { from: firstM, to: today, label: monthName };
   }
@@ -1336,13 +1388,13 @@ function getDetailFilterDates() {
   const monthName = new Date().toLocaleDateString('id-ID',{month:'long',year:'numeric'});
   switch(detailDateFilter.mode) {
     case 'today':
-      return { from: firstM, to: today, label: '1–' + fmtDate(today), shortLabel: 's/d hari ini' };
+      return { from: firstM, to: today, label: '1â' + fmtDate(today), shortLabel: 's/d hari ini' };
     case 'yesterday':
       return { from: firstM, to: yest, label: '1 s/d ' + fmtDate(yest), shortLabel: 's/d kemarin' };
     case 'range':
       return { from: detailDateFilter.from, to: detailDateFilter.to,
-               label: fmtDate(detailDateFilter.from) + ' – ' + fmtDate(detailDateFilter.to),
-               shortLabel: fmtDate(detailDateFilter.from) + '–' + fmtDate(detailDateFilter.to) };
+               label: fmtDate(detailDateFilter.from) + ' â ' + fmtDate(detailDateFilter.to),
+               shortLabel: fmtDate(detailDateFilter.from) + 'â' + fmtDate(detailDateFilter.to) };
     default: { // month
       return { from: firstM, to: today, label: monthName, shortLabel: 'bulan ini' };
     }
@@ -1413,9 +1465,9 @@ async function loadOverview() {
       <td><b>${total}</b></td>
       <td style="color:#2e7d32;font-weight:700;">${comM}</td>
       <td style="color:#c62828;font-weight:700;">${inc}</td>
-      <td style="color:#e65100;font-weight:700;">${spare || '—'}</td>
-      <td style="color:#6a1b9a;font-weight:700;">${antrian || '—'}</td>
-      <td style="font-weight:700;">${rate !== null ? rate+'%' : '—'}</td>
+      <td style="color:#e65100;font-weight:700;">${spare || 'â'}</td>
+      <td style="color:#6a1b9a;font-weight:700;">${antrian || 'â'}</td>
+      <td style="font-weight:700;">${rate !== null ? rate+'%' : 'â'}</td>
       <td>${kpiPill(rate)}</td>
     </tr>`;
   });
@@ -1461,16 +1513,16 @@ function renderUrgentPage() {
       <div class="urgent-avatar" style="background:${tek.color}">${tek.initials}</div>
       <div class="urgent-body">
         <div class="urgent-name">${t.name}</div>
-        <div class="urgent-meta">Deadline: ${fmtDate(t.due_on)} · <span style="color:#e65100;font-weight:600">${od}h overdue</span> · ${noUpdate}</div>
+        <div class="urgent-meta">Deadline: ${fmtDate(t.due_on)} Â· <span style="color:#e65100;font-weight:600">${od}h overdue</span> Â· ${noUpdate}</div>
       </div>
       <div class="urgent-who">${tek.name}</div>
     </div>`;
   }).join('');
   const pages = Math.ceil(items.length/_UPG);
   document.getElementById('urgentPager').innerHTML = pages>1 ? `<div class="pager">
-    <button onclick="window._urgPg=Math.max(0,window._urgPg-1);renderUrgentPage()" ${pg===0?'disabled':''}>← Prev</button>
-    <span class="pager-info">${pg*_UPG+1}–${Math.min((pg+1)*_UPG,items.length)} dari ${items.length}</span>
-    <button onclick="window._urgPg=Math.min(${pages-1},window._urgPg+1);renderUrgentPage()" ${pg>=pages-1?'disabled':''}>Next →</button>
+    <button onclick="window._urgPg=Math.max(0,window._urgPg-1);renderUrgentPage()" ${pg===0?'disabled':''}>â Prev</button>
+    <span class="pager-info">${pg*_UPG+1}â${Math.min((pg+1)*_UPG,items.length)} dari ${items.length}</span>
+    <button onclick="window._urgPg=Math.min(${pages-1},window._urgPg+1);renderUrgentPage()" ${pg>=pages-1?'disabled':''}>Next â</button>
   </div>` : '';
 }
 
@@ -1530,9 +1582,9 @@ function _pager(id, total) {
   if (pages <= 1) return '';
   const start = page*PG_SIZE+1, end = Math.min((page+1)*PG_SIZE, total);
   return `<div class="pager">
-    <button onclick="_chPg('${id}',-1)" ${page===0?'disabled':''}>← Prev</button>
-    <span class="pager-info">${start}–${end} dari ${total}</span>
-    <button onclick="_chPg('${id}',1)" ${page>=pages-1?'disabled':''}>Next →</button>
+    <button onclick="_chPg('${id}',-1)" ${page===0?'disabled':''}>â Prev</button>
+    <span class="pager-info">${start}â${end} dari ${total}</span>
+    <button onclick="_chPg('${id}',1)" ${page>=pages-1?'disabled':''}>Next â</button>
   </div>`;
 }
 
@@ -1554,13 +1606,13 @@ function _redraw(id) {
       const doneMs = new Date(t.completed_at).getTime();
       const diffH  = Math.floor((doneMs - dueMs) / 3600000);
       const lateLabel = diffH >= 24 ? `+${Math.floor(diffH/24)} hari terlambat` : `+${diffH}h terlambat`;
-      return tItem(off+i+1, t.name, `Deadline: ${fmtDate(t.due_on)} · Selesai: ${fmtDate(t.completed_at)} ${tag(lateLabel,'red')}`);
+      return tItem(off+i+1, t.name, `Deadline: ${fmtDate(t.due_on)} Â· Selesai: ${fmtDate(t.completed_at)} ${tag(lateLabel,'red')}`);
     }).join('')+_pager(id,items.length);
   } else if (id==='stale') {
     el.innerHTML = slice.map((t,i)=>{
       const od=daysSince(t.due_on), sd=daysSince(t.modified_at);
-      const odLabel = od !== null ? (od >= 24 ? `${Math.floor(od/24)} hari overdue` : `${od}h overdue`) : '—';
-      return tItem(off+i+1, t.name, `Deadline: ${fmtDate(t.due_on)} ${tag(odLabel,'orange')} · Update: ${sd!==null?(sd>=24?Math.floor(sd/24)+' hari lalu':sd+'h lalu'):'—'}`);
+      const odLabel = od !== null ? (od >= 24 ? `${Math.floor(od/24)} hari overdue` : `${od}h overdue`) : 'â';
+      return tItem(off+i+1, t.name, `Deadline: ${fmtDate(t.due_on)} ${tag(odLabel,'orange')} Â· Update: ${sd!==null?(sd>=24?Math.floor(sd/24)+' hari lalu':sd+'h lalu'):'â'}`);
     }).join('')+_pager(id,items.length);
   } else {
     el.innerHTML = slice.map((t,i)=>{
@@ -1577,7 +1629,7 @@ function renderLate(completedMonth) {
   const pct  = completedMonth.length>0 ? Math.round(late.length/completedMonth.length*100) : 0;
   document.getElementById('lateBadge').textContent = `${pct}% (${late.length}/${completedMonth.length})`;
   const el = document.getElementById('lateArea');
-  if (!late.length) { el.innerHTML='<div class="empty">✅ Tidak ada yang terlambat</div>'; return; }
+  if (!late.length) { el.innerHTML='<div class="empty">â Tidak ada yang terlambat</div>'; return; }
   _cache.late=late; _pg.late=0; _redraw('late');
 }
 
@@ -1588,7 +1640,7 @@ function renderOverdue(incomplete) {
   document.getElementById('overdBadge').textContent = stale.length;
   document.getElementById('mStale').textContent = stale.length;
   const el = document.getElementById('overdArea');
-  if (!stale.length) { el.innerHTML='<div class="empty">✅ Semua task aktif di-update</div>'; return; }
+  if (!stale.length) { el.innerHTML='<div class="empty">â Semua task aktif di-update</div>'; return; }
   _cache.stale=stale; _pg.stale=0; _redraw('stale');
 }
 
@@ -1599,7 +1651,7 @@ function renderReco(incomplete) {
   const noDeadline = incomplete.filter(t=>!t.due_on).sort((a,b)=>new Date(a.created_at||0)-new Date(b.created_at||0));
   const reco = [...overdue,...upcoming,...noDeadline];
   const el = document.getElementById('recoArea');
-  if (!reco.length) { el.innerHTML='<div class="empty">✅ Tidak ada task pending</div>'; return; }
+  if (!reco.length) { el.innerHTML='<div class="empty">â Tidak ada task pending</div>'; return; }
   _cache.reco=reco; _pg.reco=0; _redraw('reco');
 }
 
@@ -1607,8 +1659,8 @@ function renderOldest(incomplete) {
   const sorted = [...incomplete].sort((a,b)=>new Date(a.created_at||0)-new Date(b.created_at||0));
   const top5 = sorted.slice(0,5);
   const el = document.getElementById('oldestArea');
-  if (!top5.length) { el.innerHTML='<div class="empty">✅ Tidak ada task pending</div>'; return; }
-  const rnk=['r1','r2','r3','r4','r5'], icons=['🔴','🟠','🟡','🔵','⚪'];
+  if (!top5.length) { el.innerHTML='<div class="empty">â Tidak ada task pending</div>'; return; }
+  const rnk=['r1','r2','r3','r4','r5'], icons=['ð´','ð ','ð¡','ðµ','âª'];
   el.innerHTML = `<div class="g5">` + top5.map((t,i)=>{
     const d = daysSince(t.created_at), tc = d>14?'red':d>7?'orange':'green';
     return `<div class="oldest-cell ${rnk[i]}">
@@ -1623,7 +1675,7 @@ function renderNewToday(newTasks) {
   const el = document.getElementById('newArea');
   if (!newTasks.length) { el.innerHTML='<div class="empty">Belum ada task baru hari ini</div>'; return; }
   el.innerHTML = newTasks.map((t,i)=>{
-    const time = t.created_at ? new Date(t.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}) : '—';
+    const time = t.created_at ? new Date(t.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}) : 'â';
     return tItem(i+1, t.name, `Masuk jam ${time}`);
   }).join('');
 }
@@ -1643,39 +1695,39 @@ async function init() {
   const dbg = document.getElementById('debugBar');
   dbg.style.display = 'block';
   dbg.style.background = '#fff3cd'; dbg.style.borderColor = '#ffc107';
-  dbg.innerHTML = `🔧 WS: ${WORKSPACE||'KOSONG'} | Token: ...${(getToken()||'').slice(-12)} | Teknisi: ${currentTeknisi.name} | Cabang: ${cabangGid?PROJECTS[cabangGid]:'Semua'}`;
+  dbg.innerHTML = `ð§ WS: ${WORKSPACE||'KOSONG'} | Token: ...${(getToken()||'').slice(-12)} | Teknisi: ${currentTeknisi.name} | Cabang: ${cabangGid?PROJECTS[cabangGid]:'Semua'}`;
 
   const dfd = getDetailFilterDates();
   document.getElementById('dateLbl').textContent = now.toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'long',year:'numeric'});
   document.getElementById('detailMonth').textContent = dfd.label;
 
   ['lateArea','overdArea','recoArea','oldestArea','newArea'].forEach(id =>
-    document.getElementById(id).innerHTML = '<div class="loading">⏳</div>');
+    document.getElementById(id).innerHTML = '<div class="loading">â³</div>');
   ['dInc','dCom','dRate','dNew','mCom','mRem','mAvg','mStale','scorePct','scoreName'].forEach(id =>
-    document.getElementById(id).textContent = '—');
+    document.getElementById(id).textContent = 'â');
 
   try {
     const today  = todayStr();
     const firstM = firstOfMonth();
     const sixAgo = sixMonthsAgo();
 
-    dbg.innerHTML += ' | ⏳ Mengambil data...';
+    dbg.innerHTML += ' | â³ Mengambil data...';
     let allTasks;
     try {
       allTasks = await fetchUserTasks(teknisiGid, sixAgo);
-      dbg.innerHTML += ` ✅ ${allTasks.length} task`;
+      dbg.innerHTML += ` â ${allTasks.length} task`;
     } catch(e) {
-      dbg.innerHTML += `<br>❌ ${e.message}`;
+      dbg.innerHTML += `<br>â ${e.message}`;
       dbg.style.background = '#ffebee'; dbg.style.borderColor = '#ef9a9a';
-      btn.disabled = false; btn.innerHTML = '🔄 Refresh Data'; return;
+      btn.disabled = false; btn.innerHTML = 'ð Refresh Data'; return;
     }
 
     if (cabangGid) {
       allTasks = allTasks.filter(t => t.memberships && t.memberships.some(m => m.project && m.project.gid === cabangGid));
-      dbg.innerHTML += ` → ${allTasks.length} di ${PROJECTS[cabangGid]}`;
+      dbg.innerHTML += ` â ${allTasks.length} di ${PROJECTS[cabangGid]}`;
     }
 
-    // Hanya hitung main task (nota) — exclude subtask
+    // Hanya hitung main task (nota) â exclude subtask
     allTasks = allTasks.filter(t => !t.parent || !t.parent.gid);
     dbg.innerHTML += ` | main: ${allTasks.length}`;
 
@@ -1684,7 +1736,7 @@ async function init() {
       const sSet = ACTIVE_SECTIONS[cabangGid];
       const before = incomplete.length;
       incomplete = incomplete.filter(t => t.memberships && t.memberships.some(m => m.section && sSet.has(m.section.gid)));
-      dbg.innerHTML += ` | section: ${before}→${incomplete.length}`;
+      dbg.innerHTML += ` | section: ${before}â${incomplete.length}`;
     }
 
     // Filter by selected period (dfd = detail filter dates)
@@ -1692,7 +1744,7 @@ async function init() {
     // completedPeriod = kumulatif dari firstM s/d end date
     const completedOnDay  = allTasks.filter(t => t.completed && isoToLocalDate(t.completed_at) === dfd.to);
     const completedPeriod = allTasks.filter(t => t.completed && isoToLocalDate(t.completed_at) >= dfd.from && isoToLocalDate(t.completed_at) <= dfd.to);
-    // newPeriod selalu hari ini saja (bukan range period) — section ini khusus task masuk hari ini
+    // newPeriod selalu hari ini saja (bukan range period) â section ini khusus task masuk hari ini
     const _today          = todayStr();
     const newPeriod       = allTasks.filter(t => !t.parent && isoToLocalDate(t.created_at) === _today);
     const completed6mo    = allTasks.filter(t => t.completed && isoToLocalDate(t.completed_at) >= sixAgo);
@@ -1725,7 +1777,7 @@ async function init() {
     document.getElementById('mRem').textContent = incomplete.length;
     document.getElementById('mAvg').textContent = (completedPeriod.length / rangeDays).toFixed(1);
 
-    // Score (based on cumulative period) — bobot: selesai 85%, tepat waktu 15%
+    // Score (based on cumulative period) â bobot: selesai 85%, tepat waktu 15%
     const lateCount = completedPeriod.filter(t => t.due_on && t.completed_at && t.due_on < isoToLocalDate(t.completed_at)).length;
     const sc = getScore(completedPeriod.length, incomplete.length, lateCount);
     document.getElementById('scoreBox').style.background = sc.bg;
@@ -1755,12 +1807,12 @@ async function init() {
     renderNewToday(newPeriod);
 
   } catch(e) {
-    dbg.innerHTML += `<br>❌ ${e.message}`;
+    dbg.innerHTML += `<br>â ${e.message}`;
     dbg.style.background = '#ffebee'; dbg.style.borderColor = '#ef9a9a';
     document.getElementById('lateArea').innerHTML = `<div class="empty" style="color:#e53935">Error: ${e.message}</div>`;
   }
 
-  btn.disabled = false; btn.innerHTML = '🔄 Refresh Data';
+  btn.disabled = false; btn.innerHTML = 'ð Refresh Data';
 }
 
 // ===================== BOOT =====================
@@ -1768,7 +1820,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && document.getElementById('tokenScreen').style.display !== 'none') handleLogin();
 });
 
-// Token sudah di-embed → langsung ke landing selalu
+// Token sudah di-embed â langsung ke landing selalu
 document.getElementById('landing').style.display = 'block';
 </script>
 </body>
