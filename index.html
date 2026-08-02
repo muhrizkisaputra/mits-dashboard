@@ -630,6 +630,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
           </div>
         </div>
 
+        <!-- Modal: daftar task selesai (per teknisi) -->
+        <div id="selesaiModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;overflow-y:auto;padding:20px;" onclick="if(event.target===this)closeSelesaiModal()">
+          <div style="background:#fff;border-radius:16px;max-width:720px;margin:0 auto;padding:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+            <div id="selesaiModalHdr" style="background:#2e7d32;color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div style="font-size:15px;font-weight:800;" id="selesaiModalTitle">—</div>
+                <div style="font-size:11px;opacity:.7;margin-top:2px;" id="selesaiModalSub">—</div>
+              </div>
+              <button onclick="closeSelesaiModal()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px;">✕ Tutup</button>
+            </div>
+            <div style="padding:6px 14px 4px;background:#f1f8e9;border-bottom:1px solid #eee;font-size:11px;color:#888;">
+              Klik nama task atau tombol <b>Buka ↗</b> untuk membuka di Asana
+            </div>
+            <div id="selesaiModalBody" style="max-height:60vh;overflow-y:auto;padding:10px 14px;">
+              <div class="loading">⏳ Memuat...</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Modal: daftar task tanpa teknisi / tanpa deadline -->
         <div id="issueModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;overflow-y:auto;padding:20px;" onclick="if(event.target===this)closeIssueModal()">
           <div style="background:#fff;border-radius:16px;max-width:720px;margin:0 auto;padding:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);">
@@ -727,36 +746,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
           </div>
         </div>
         <div class="g4" style="margin:0;align-content:start;">
-          <div class="stat c-red">  <div class="stat-lbl">Belum Selesai</div>  <div class="stat-val red"    id="dInc">—</div><div class="stat-sub">task aktif</div></div>
-          <div class="stat c-green"><div class="stat-lbl" id="lblDCom">Selesai Hari Ini</div><div class="stat-val green"  id="dCom">—</div><div class="stat-sub" id="subDCom">hari ini</div></div>
+          <div class="stat c-red" style="cursor:pointer;" onclick="showSelesaiModal('inc')" title="Klik untuk lihat daftar task belum selesai"><div class="stat-lbl">Belum Selesai</div><div class="stat-val red" id="dInc">—</div><div class="stat-sub">task aktif · klik untuk detail</div></div>
+          <div class="stat c-green" style="cursor:pointer;" onclick="showSelesaiModal('day')" title="Klik untuk lihat daftar task selesai"><div class="stat-lbl" id="lblDCom">Selesai Hari Ini</div><div class="stat-val green"  id="dCom">—</div><div class="stat-sub" id="subDCom">hari ini · klik untuk detail</div></div>
           <div class="stat c-blue"> <div class="stat-lbl">Completion Rate</div> <div class="stat-val blue"   id="dRate">—</div><div class="stat-sub" id="subDRate">hari ini</div></div>
-          <div class="stat c-orange"><div class="stat-lbl">Task Baru Masuk</div><div class="stat-val orange" id="dNew">—</div><div class="stat-sub">hari ini</div></div>
+          <div class="stat c-orange" style="cursor:pointer;" onclick="showSelesaiModal('new')" title="Klik untuk lihat daftar task baru masuk"><div class="stat-lbl">Task Baru Masuk</div><div class="stat-val orange" id="dNew">—</div><div class="stat-sub">hari ini · klik untuk detail</div></div>
         </div>
       </div>
 
       <!-- Monthly Summary -->
       <div class="g4" style="margin-bottom:14px;">
-        <div class="stat c-teal">  <div class="stat-lbl" id="lblMCom">Selesai Bulan Ini</div><div class="stat-val teal"   id="mCom">—</div><div class="stat-sub" id="subMCom">task</div></div>
-        <div class="stat c-red">   <div class="stat-lbl">Task Remaining</div>   <div class="stat-val red"    id="mRem">—</div><div class="stat-sub">belum selesai</div></div>
+        <div class="stat c-teal" style="cursor:pointer;" onclick="showSelesaiModal('period')" title="Klik untuk lihat daftar task selesai"><div class="stat-lbl" id="lblMCom">Selesai Bulan Ini</div><div class="stat-val teal"   id="mCom">—</div><div class="stat-sub" id="subMCom">task · klik untuk detail</div></div>
+        <div class="stat c-red" style="cursor:pointer;" onclick="showSelesaiModal('inc')" title="Klik untuk lihat daftar task belum selesai"><div class="stat-lbl">Task Remaining</div><div class="stat-val red" id="mRem">—</div><div class="stat-sub">belum selesai · klik untuk detail</div></div>
         <div class="stat c-purple"><div class="stat-lbl">Rata-rata Harian</div> <div class="stat-val purple" id="mAvg">—</div><div class="stat-sub">task/hari</div></div>
-        <div class="stat c-orange"><div class="stat-lbl">Tidak Di-update</div>  <div class="stat-val orange" id="mStale">—</div><div class="stat-sub">overdue, belum update hari ini</div></div>
+        <div class="stat c-orange" style="cursor:pointer;" onclick="showSelesaiModal('stale')" title="Klik untuk lihat daftar task overdue belum di-update"><div class="stat-lbl">Tidak Di-update</div><div class="stat-val orange" id="mStale">—</div><div class="stat-sub">overdue · klik untuk detail</div></div>
       </div>
       <!-- Section Metrics: Sparepart & Belum Dikerjakan -->
       <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
-        <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #e65100;background:#fff8f5;">
+        <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #e65100;background:#fff8f5;cursor:pointer;" onclick="showSelesaiModal('spare')" title="Klik untuk lihat daftar task menunggu sparepart">
           <div class="stat-lbl" style="color:#e65100;">🔧 Menunggu Sparepart</div>
           <div class="stat-val" style="color:#e65100;" id="dSparepart">—</div>
-          <div class="stat-sub">task di section sparepart</div>
+          <div class="stat-sub">klik untuk detail</div>
         </div>
-        <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #6a1b9a;background:#faf5ff;">
+        <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #6a1b9a;background:#faf5ff;cursor:pointer;" onclick="showSelesaiModal('antrian')" title="Klik untuk lihat daftar task belum dikerjakan">
           <div class="stat-lbl" style="color:#6a1b9a;">⏳ Belum Dikerjakan</div>
           <div class="stat-val" style="color:#6a1b9a;" id="dAntrian">—</div>
-          <div class="stat-sub">task di antrian</div>
+          <div class="stat-sub">klik untuk detail</div>
         </div>
-        <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #757575;background:#f5f5f5;">
+        <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #757575;background:#f5f5f5;cursor:pointer;" onclick="showSelesaiModal('cancel')" title="Klik untuk lihat daftar task dibatalkan">
           <div class="stat-lbl" style="color:#757575;">❌ Dibatalkan</div>
           <div class="stat-val" style="color:#757575;" id="dCancel">—</div>
-          <div class="stat-sub">task di section cancel</div>
+          <div class="stat-sub">klik untuk detail</div>
         </div>
       </div>
 
@@ -887,6 +906,9 @@ async function loadProjectSections() {
 // Simpan daftar task untuk modal
 let _issueNoAssignee = [];
 let _issueNoDeadline = [];
+let _selesaiPeriod   = [];
+let _selesaiDay      = [];
+let _taskStore       = {};  // unified task list store: key → [{gid,name,projectGid,meta}]
 
 // Count tasks tanpa assignee & tanpa deadline di semua project (untuk top metrics)
 async function countProjectIssues() {
@@ -969,6 +991,61 @@ function showIssueModal(type) {
 
 function closeIssueModal() {
   document.getElementById('issueModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+const _MODAL_CFG = {
+  day:     { title: '✅ Selesai Hari Ini',              color: '#2e7d32' },
+  period:  { title: '✅ Selesai (Kumulatif Periode)',    color: '#00695c' },
+  inc:     { title: '🔴 Belum Selesai',                 color: '#c62828' },
+  new:     { title: '🆕 Task Baru Masuk Hari Ini',      color: '#e65100' },
+  stale:   { title: '⚠️ Overdue — Belum Di-update',    color: '#f57f17' },
+  spare:   { title: '🔧 Menunggu Sparepart',            color: '#bf360c' },
+  antrian: { title: '⏳ Belum Dikerjakan',              color: '#6a1b9a' },
+  cancel:  { title: '❌ Task Dibatalkan',               color: '#616161' },
+};
+
+function showSelesaiModal(type) {
+  const cfg   = _MODAL_CFG[type] || { title: type, color: '#333' };
+  const list  = (type === 'day' ? _selesaiDay : type === 'period' ? _selesaiPeriod : null) || _taskStore[type] || [];
+
+  const modal = document.getElementById('selesaiModal');
+  const hdr   = document.getElementById('selesaiModalHdr');
+  const title = document.getElementById('selesaiModalTitle');
+  const sub   = document.getElementById('selesaiModalSub');
+  const body  = document.getElementById('selesaiModalBody');
+
+  hdr.style.background  = cfg.color;
+  title.textContent     = cfg.title;
+  sub.textContent       = list.length + ' task ditemukan';
+
+  if (!list.length) {
+    body.innerHTML = '<div class="empty">📭 Tidak ada task ditemukan</div>';
+  } else {
+    body.innerHTML = list.map((t, i) => {
+      const asanaUrl = t.projectGid
+        ? `https://app.asana.com/0/${t.projectGid}/${t.gid}/f`
+        : `https://app.asana.com/0/0/${t.gid}/f`;
+      const btnBg = cfg.color + '20';
+      return `<div style="display:flex;align-items:center;gap:8px;padding:7px 4px;border-bottom:1px solid #f5f5f5;">
+        <span style="font-size:10px;color:#ccc;width:24px;text-align:right;flex-shrink:0;">${i + 1}.</span>
+        <a href="${asanaUrl}" target="_blank" rel="noopener"
+           style="flex:1;font-size:12px;font-weight:600;color:var(--txt);text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"
+           title="${t.name}">${t.name}</a>
+        <span style="flex-shrink:0;font-size:10px;color:#888;white-space:nowrap;">${t.meta || ''}</span>
+        <a href="${asanaUrl}" target="_blank" rel="noopener"
+           style="flex-shrink:0;font-size:10px;padding:3px 8px;background:${btnBg};color:${cfg.color};border-radius:6px;text-decoration:none;font-weight:700;">
+          Buka ↗
+        </a>
+      </div>`;
+    }).join('');
+  }
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSelesaiModal() {
+  document.getElementById('selesaiModal').style.display = 'none';
   document.body.style.overflow = '';
 }
 
@@ -1690,6 +1767,7 @@ function renderOverdue(incomplete) {
   const stale = incomplete.filter(t=> t.due_on && t.due_on < now && isoToLocalDate(t.modified_at) !== now);
   document.getElementById('overdBadge').textContent = stale.length;
   document.getElementById('mStale').textContent = stale.length;
+  _taskStore.stale = stale.map(t => { const pgid = (t.memberships&&t.memberships[0]&&t.memberships[0].project)?t.memberships[0].project.gid:''; return { gid: t.gid, name: t.name, projectGid: pgid, meta: t.due_on ? '📅 Due: ' + t.due_on : '' }; });
   const el = document.getElementById('overdArea');
   if (!stale.length) { el.innerHTML='<div class="empty">✅ Semua task aktif di-update</div>'; return; }
   _cache.stale=stale; _pg.stale=0; _redraw('stale');
@@ -1805,6 +1883,19 @@ async function init() {
     // completedPeriod = kumulatif dari firstM s/d end date — EXCLUDE cancel
     const completedOnDay  = allTasks.filter(t => t.completed && !isCancel(t) && isoToLocalDate(t.completed_at) === dfd.to);
     const completedPeriod = allTasks.filter(t => t.completed && !isCancel(t) && isoToLocalDate(t.completed_at) >= dfd.from && isoToLocalDate(t.completed_at) <= dfd.to);
+    // Simpan untuk task list modal
+    const _pgid  = t => (t.memberships && t.memberships[0] && t.memberships[0].project) ? t.memberships[0].project.gid : '';
+    const _mt    = (t, meta) => ({ gid: t.gid, name: t.name, projectGid: _pgid(t), meta });
+    _selesaiDay    = completedOnDay.map(t  => _mt(t, isoToLocalDate(t.completed_at)));
+    _selesaiPeriod = completedPeriod.map(t => _mt(t, isoToLocalDate(t.completed_at)));
+    _taskStore.day    = _selesaiDay;
+    _taskStore.period = _selesaiPeriod;
+    _taskStore.inc    = incomplete.map(t => _mt(t, t.due_on ? '📅 ' + t.due_on : ''));
+    _taskStore.new    = newPeriod.map(t  => _mt(t, '🕐 ' + isoToLocalDate(t.created_at)));
+    // Spare & antrian & cancel
+    _taskStore.spare   = incomplete.filter(t => t.memberships && t.memberships.some(m => m.section && SPAREPART_GIDS.has(m.section.gid))).map(t => _mt(t, t.due_on ? '📅 ' + t.due_on : ''));
+    _taskStore.antrian = incomplete.filter(t => t.memberships && t.memberships.some(m => m.section && ANTRIAN_GIDS.has(m.section.gid))).map(t => _mt(t, t.due_on ? '📅 ' + t.due_on : ''));
+    _taskStore.cancel  = allTasks.filter(t => isCancel(t)).map(t => _mt(t, ''));
     // newPeriod selalu hari ini saja (bukan range period) — section ini khusus task masuk hari ini
     const _today          = todayStr();
     const newPeriod       = allTasks.filter(t => !t.parent && isoToLocalDate(t.created_at) === _today);
