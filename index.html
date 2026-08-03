@@ -543,7 +543,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
     <div class="sb-footer">
       <div style="font-size:9px;color:rgba(255,255,255,.3);margin-bottom:8px;text-align:center;" id="dateLbl">—</div>
-      <button class="sb-logout" id="refreshBtn" onclick="init()">🔄 Refresh Data</button>
+      <button class="sb-logout" id="refreshBtn" onclick="if(currentTeknisi)delete _taskCache[currentTeknisi.gid];init()">🔄 Refresh Data</button>
       <button class="sb-logout" onclick="loadDynamicTeknisi()" style="margin-top:6px;background:rgba(255,255,255,.08);">↺ Sync Teknisi</button>
       <button class="sb-logout" onclick="logout()" style="margin-top:6px;">🔓 Ganti Token</button>
     </div>
@@ -909,6 +909,8 @@ let _issueNoDeadline = [];
 let _selesaiPeriod   = [];
 let _selesaiDay      = [];
 let _taskStore       = {};  // unified task list store: key → [{gid,name,projectGid,meta}]
+const _taskCache     = {};  // { [teknisiGid]: { tasks, fetchedAt } } — in-memory cache 5 menit
+const CACHE_TTL      = 5 * 60 * 1000;
 
 // Count tasks tanpa assignee & tanpa deadline di semua project (untuk top metrics)
 async function countProjectIssues() {
@@ -1381,7 +1383,14 @@ async function apiFetch(url) {
   }
 }
 
-async function fetchUserTasks(teknisiGid, completedSince) {
+async function fetchUserTasks(teknisiGid, completedSince, forceRefresh = false) {
+  // Serve from cache if valid (same teknisi, within 5 min, not forced)
+  const cached = _taskCache[teknisiGid];
+  if (!forceRefresh && cached && (Date.now() - cached.fetchedAt) < CACHE_TTL) {
+    const dbg = document.getElementById('debugBar');
+    if (dbg) dbg.innerHTML += ' | ⚡ cache hit';
+    return cached.tasks;
+  }
   const sinceParam = completedSince ? `&completed_since=${completedSince}` : '';
   const BASE = `${API}/tasks?assignee=${teknisiGid}&workspace=${WORKSPACE}&opt_fields=name,completed,completed_at,due_on,created_at,modified_at,parent.gid,memberships.project.gid,memberships.section.gid&limit=100${sinceParam}`;
   let allTasks = [], nextOffset = null, page = 0;
@@ -1391,6 +1400,7 @@ async function fetchUserTasks(teknisiGid, completedSince) {
     allTasks = allTasks.concat(data.data || []);
     nextOffset = (data.next_page && data.next_page.offset) ? data.next_page.offset : null;
   } while (nextOffset && page < 30);
+  _taskCache[teknisiGid] = { tasks: allTasks, fetchedAt: Date.now() };
   return allTasks;
 }
 
