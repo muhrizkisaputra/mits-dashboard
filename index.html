@@ -1891,7 +1891,6 @@ async function init() {
     _taskStore.day    = _selesaiDay;
     _taskStore.period = _selesaiPeriod;
     _taskStore.inc    = incomplete.map(t => _mt(t, t.due_on ? '📅 ' + t.due_on : ''));
-    _taskStore.new    = newPeriod.map(t  => _mt(t, '🕐 ' + isoToLocalDate(t.created_at)));
     // Spare & antrian & cancel
     _taskStore.spare   = incomplete.filter(t => t.memberships && t.memberships.some(m => m.section && SPAREPART_GIDS.has(m.section.gid))).map(t => _mt(t, t.due_on ? '📅 ' + t.due_on : ''));
     _taskStore.antrian = incomplete.filter(t => t.memberships && t.memberships.some(m => m.section && ANTRIAN_GIDS.has(m.section.gid))).map(t => _mt(t, t.due_on ? '📅 ' + t.due_on : ''));
@@ -1899,6 +1898,7 @@ async function init() {
     // newPeriod selalu hari ini saja (bukan range period) — section ini khusus task masuk hari ini
     const _today          = todayStr();
     const newPeriod       = allTasks.filter(t => !t.parent && isoToLocalDate(t.created_at) === _today);
+    _taskStore.new    = newPeriod.map(t  => _mt(t, '🕐 ' + isoToLocalDate(t.created_at)));
     const completed6mo    = allTasks.filter(t => t.completed && !isCancel(t) && isoToLocalDate(t.completed_at) >= sixAgo);
 
     // Days in selected range (for avg calculation)
