@@ -745,12 +745,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
             <div>③ Return (20%): <b id="scoreKpi3">100</b> / 100 <span style="opacity:.5;font-size:9px;">*</span></div>
           </div>
         </div>
-        <div class="g4" style="margin:0;align-content:start;">
-          <div class="stat c-red" style="cursor:pointer;" onclick="showSelesaiModal('inc')" title="Klik untuk lihat daftar task belum selesai"><div class="stat-lbl">Belum Selesai</div><div class="stat-val red" id="dInc">—</div><div class="stat-sub">task aktif · klik untuk detail</div></div>
-          <div class="stat c-green" style="cursor:pointer;" onclick="showSelesaiModal('day')" title="Klik untuk lihat daftar task selesai"><div class="stat-lbl" id="lblDCom">Selesai Hari Ini</div><div class="stat-val green"  id="dCom">—</div><div class="stat-sub" id="subDCom">hari ini · klik untuk detail</div></div>
-          <div class="stat c-blue"> <div class="stat-lbl">Completion Rate</div> <div class="stat-val blue"   id="dRate">—</div><div class="stat-sub" id="subDRate">hari ini</div></div>
-          <div class="stat c-orange" style="cursor:pointer;" onclick="showSelesaiModal('new')" title="Klik untuk lihat daftar task baru masuk"><div class="stat-lbl">Task Baru Masuk</div><div class="stat-val orange" id="dNew">—</div><div class="stat-sub">hari ini · klik untuk detail</div></div>
-        </div>
+      </div>
+
+      <!-- Daily Stats -->
+      <div class="g4" style="margin-bottom:14px;">
+        <div class="stat c-red" style="cursor:pointer;" onclick="showSelesaiModal('inc')" title="Klik untuk lihat daftar task belum selesai"><div class="stat-lbl">Belum Selesai</div><div class="stat-val red" id="dInc">—</div><div class="stat-sub">task aktif · klik untuk detail</div></div>
+        <div class="stat c-green" style="cursor:pointer;" onclick="showSelesaiModal('day')" title="Klik untuk lihat daftar task selesai"><div class="stat-lbl" id="lblDCom">Selesai Hari Ini</div><div class="stat-val green"  id="dCom">—</div><div class="stat-sub" id="subDCom">hari ini · klik untuk detail</div></div>
+        <div class="stat c-blue"> <div class="stat-lbl">Completion Rate</div> <div class="stat-val blue"   id="dRate">—</div><div class="stat-sub" id="subDRate">hari ini</div></div>
+        <div class="stat c-orange" style="cursor:pointer;" onclick="showSelesaiModal('new')" title="Klik untuk lihat daftar task baru masuk"><div class="stat-lbl">Task Baru Masuk</div><div class="stat-val orange" id="dNew">—</div><div class="stat-sub">hari ini · klik untuk detail</div></div>
       </div>
 
       <!-- Monthly Summary -->
