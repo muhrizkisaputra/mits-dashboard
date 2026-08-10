@@ -643,7 +643,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
             <div style="padding:6px 14px 4px;background:#f1f8e9;border-bottom:1px solid #eee;font-size:11px;color:#888;">
               Klik nama task atau tombol <b>Buka ↗</b> untuk membuka di Asana
             </div>
-            <div id="selesaiModalBody" style="max-height:60vh;overflow-y:auto;padding:10px 14px;">
+            <div id="selesaiModalBody" style="max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px;">
               <div class="loading">⏳ Memuat...</div>
             </div>
           </div>
@@ -662,7 +662,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
             <div style="padding:6px 14px 4px;background:#f8faf9;border-bottom:1px solid #eee;font-size:11px;color:#888;">
               Klik nama task untuk buka di Asana dan tambahkan <b id="issueModalHint">—</b>
             </div>
-            <div id="issueModalBody" style="max-height:60vh;overflow-y:auto;padding:10px 14px;">
+            <div id="issueModalBody" style="max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px;">
               <div class="loading">⏳ Memuat...</div>
             </div>
           </div>
@@ -912,7 +912,7 @@ let _selesaiPeriod   = [];
 let _selesaiDay      = [];
 let _taskStore       = {};  // unified task list store: key → [{gid,name,projectGid,meta}]
 const _taskCache     = {};  // { [teknisiGid]: { tasks, fetchedAt } } — in-memory cache 5 menit
-const CACHE_TTL      = 5 * 60 * 1000;
+const CACHE_TTL      = 30 * 60 * 1000;
 
 // Count tasks tanpa assignee & tanpa deadline di semua project (untuk top metrics)
 async function countProjectIssues() {
@@ -1182,6 +1182,9 @@ let currentView = 'overview'; // 'overview' | 'detail'
 
 function showView(view) {
   currentView = view;
+  document.body.style.overflow = '';
+  document.getElementById('selesaiModal').style.display = 'none';
+  document.getElementById('issueModal').style.display   = 'none';
   document.getElementById('viewOverview').style.display = view === 'overview' ? 'block' : 'none';
   document.getElementById('viewDetail').style.display   = view === 'detail'   ? 'block' : 'none';
 
@@ -1396,14 +1399,23 @@ async function fetchUserTasks(teknisiGid, completedSince, forceRefresh = false) 
   const sinceParam = completedSince ? `&completed_since=${completedSince}` : '';
   const BASE = `${API}/tasks?assignee=${teknisiGid}&workspace=${WORKSPACE}&opt_fields=name,completed,completed_at,due_on,created_at,modified_at,parent.gid,memberships.project.gid,memberships.section.gid&limit=100${sinceParam}`;
   let allTasks = [], nextOffset = null, page = 0;
-  do {
-    page++;
-    const data = await apiFetch(BASE + (nextOffset ? `&offset=${nextOffset}` : ''));
-    allTasks = allTasks.concat(data.data || []);
-    nextOffset = (data.next_page && data.next_page.offset) ? data.next_page.offset : null;
-  } while (nextOffset && page < 30);
-  _taskCache[teknisiGid] = { tasks: allTasks, fetchedAt: Date.now() };
-  return allTasks;
+  try {
+    do {
+      page++;
+      const data = await apiFetch(BASE + (nextOffset ? `&offset=${nextOffset}` : ''));
+      allTasks = allTasks.concat(data.data || []);
+      nextOffset = (data.next_page && data.next_page.offset) ? data.next_page.offset : null;
+    } while (nextOffset && page < 30);
+    _taskCache[teknisiGid] = { tasks: allTasks, fetchedAt: Date.now() };
+    return allTasks;
+  } catch(e) {
+    if (cached) {
+      const dbg = document.getElementById('debugBar');
+      if (dbg) dbg.innerHTML += ' | ⚠️ stale cache (jaringan gagal)';
+      return cached.tasks;
+    }
+    throw e;
+  }
 }
 
 // ===================== UTILS =====================
