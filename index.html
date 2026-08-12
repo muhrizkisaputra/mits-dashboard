@@ -630,44 +630,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
           </div>
         </div>
 
-        <!-- Modal: daftar task selesai (per teknisi) -->
-        <div id="selesaiModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;overflow-y:auto;padding:20px;" onclick="if(event.target===this)closeSelesaiModal()">
-          <div style="background:#fff;border-radius:16px;max-width:720px;margin:0 auto;padding:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);">
-            <div id="selesaiModalHdr" style="background:#2e7d32;color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
-              <div>
-                <div style="font-size:15px;font-weight:800;" id="selesaiModalTitle">—</div>
-                <div style="font-size:11px;opacity:.7;margin-top:2px;" id="selesaiModalSub">—</div>
-              </div>
-              <button onclick="closeSelesaiModal()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px;">✕ Tutup</button>
-            </div>
-            <div style="padding:6px 14px 4px;background:#f1f8e9;border-bottom:1px solid #eee;font-size:11px;color:#888;">
-              Klik nama task atau tombol <b>Buka ↗</b> untuk membuka di Asana
-            </div>
-            <div id="selesaiModalBody" style="max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px;">
-              <div class="loading">⏳ Memuat...</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal: daftar task tanpa teknisi / tanpa deadline -->
-        <div id="issueModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;overflow-y:auto;padding:20px;" onclick="if(event.target===this)closeIssueModal()">
-          <div style="background:#fff;border-radius:16px;max-width:720px;margin:0 auto;padding:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);">
-            <div id="issueModalHdr" style="background:var(--sb);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
-              <div>
-                <div style="font-size:15px;font-weight:800;" id="issueModalTitle">—</div>
-                <div style="font-size:11px;opacity:.7;margin-top:2px;" id="issueModalSub">—</div>
-              </div>
-              <button onclick="closeIssueModal()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px;">✕ Tutup</button>
-            </div>
-            <div style="padding:6px 14px 4px;background:#f8faf9;border-bottom:1px solid #eee;font-size:11px;color:#888;">
-              Klik nama task untuk buka di Asana dan tambahkan <b id="issueModalHint">—</b>
-            </div>
-            <div id="issueModalBody" style="max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px;">
-              <div class="loading">⏳ Memuat...</div>
-            </div>
-          </div>
-        </div>
-
         <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
         <table class="ov-table" id="ovTable">
           <thead>
@@ -822,6 +784,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
 
       </div><!-- /viewDetail -->
+
+      <!-- Modal: daftar task selesai — di luar view divs agar selalu visible -->
+      <div id="selesaiModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;overflow-y:auto;padding:20px;" onclick="if(event.target===this)closeSelesaiModal()">
+        <div style="background:#fff;border-radius:16px;max-width:720px;margin:0 auto;padding:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+          <div id="selesaiModalHdr" style="background:#2e7d32;color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:15px;font-weight:800;" id="selesaiModalTitle">—</div>
+              <div style="font-size:11px;opacity:.7;margin-top:2px;" id="selesaiModalSub">—</div>
+            </div>
+            <button onclick="closeSelesaiModal()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px;">✕ Tutup</button>
+          </div>
+          <div style="padding:6px 14px 4px;background:#f1f8e9;border-bottom:1px solid #eee;font-size:11px;color:#888;">
+            Klik nama task atau tombol <b>Buka ↗</b> untuk membuka di Asana
+          </div>
+          <div id="selesaiModalBody" style="max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px;">
+            <div class="loading">⏳ Memuat...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal: daftar task tanpa teknisi / tanpa deadline -->
+      <div id="issueModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;overflow-y:auto;padding:20px;" onclick="if(event.target===this)closeIssueModal()">
+        <div style="background:#fff;border-radius:16px;max-width:720px;margin:0 auto;padding:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+          <div id="issueModalHdr" style="background:var(--sb);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:15px;font-weight:800;" id="issueModalTitle">—</div>
+              <div style="font-size:11px;opacity:.7;margin-top:2px;" id="issueModalSub">—</div>
+            </div>
+            <button onclick="closeIssueModal()" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px;">✕ Tutup</button>
+          </div>
+          <div style="padding:6px 14px 4px;background:#f8faf9;border-bottom:1px solid #eee;font-size:11px;color:#888;">
+            Klik nama task untuk buka di Asana dan tambahkan <b id="issueModalHint">—</b>
+          </div>
+          <div id="issueModalBody" style="max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px 14px;">
+            <div class="loading">⏳ Memuat...</div>
+          </div>
+        </div>
+      </div>
 
     </div><!-- /content -->
   </main>
