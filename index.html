@@ -1130,27 +1130,30 @@ async function loadDynamicTeknisi() {
     projectEntries.map(([pgid]) => fetchProjectAssignees(pgid))
   );
 
-  // Prioritas branch: project dengan task AKTIF (incomplete) terbanyak.
-  // Jika sama/nol, fallback ke total task terbanyak.
-  // Ini memastikan teknisi yang mutasi muncul di cabang baru.
+  // Kumpulkan SEMUA cabang per teknisi (teknisi bisa aktif di lebih dari 1 cabang).
+  // Primary branch = cabang dengan task AKTIF terbanyak (fallback: total terbanyak).
   const byGid = {};
   results.forEach((res, i) => {
     const [, branchName] = projectEntries[i];
     if (res.status !== 'fulfilled') return;
     res.value.forEach(({ gid, name, total, active }) => {
       if (total === 0) return;
-      const cur = byGid[gid];
-      const better = !cur
-        || active > (cur.active || 0)
-        || (active === (cur.active || 0) && total > (cur.total || 0));
-      if (better) byGid[gid] = { gid, name, branch: branchName, active, total };
+      if (!byGid[gid]) {
+        byGid[gid] = { gid, name, branch: branchName, branches: [branchName], active, total };
+      } else {
+        const cur = byGid[gid];
+        if (!cur.branches.includes(branchName)) cur.branches.push(branchName);
+        const better = active > (cur.active || 0)
+          || (active === (cur.active || 0) && total > (cur.total || 0));
+        if (better) { cur.branch = branchName; cur.active = active; cur.total = total; }
+      }
     });
   });
 
-  TEKNISI_LIST = Object.values(byGid).map(({ gid, name, branch }) => {
+  TEKNISI_LIST = Object.values(byGid).map(({ gid, name, branch, branches }) => {
     const meta = TEKNISI_META[gid];
     return {
-      gid, branch,
+      gid, branch, branches,
       name:     meta?.name     || name,
       initials: meta?.initials || nameToInitials(name),
       color:    meta?.color    || gidToColor(gid),
@@ -1197,13 +1200,21 @@ function showView(view) {
 
 // ===================== SIDEBAR BUILD =====================
 function buildSidebar() {
-  // Group by branch preserving order
-  const branches = [];
+  // Teknisi bisa tampil di BEBERAPA cabang sesuai project Asana mereka
+  const projectBranchOrder = Object.values(PROJECTS);
   const branchMap = {};
+
   TEKNISI_LIST.forEach(t => {
-    if (!branchMap[t.branch]) { branchMap[t.branch] = []; branches.push(t.branch); }
-    branchMap[t.branch].push(t);
+    (t.branches && t.branches.length ? t.branches : [t.branch]).forEach(branch => {
+      if (!branchMap[branch]) branchMap[branch] = [];
+      branchMap[branch].push(t);
+    });
   });
+
+  const branches = [
+    ...projectBranchOrder.filter(b => branchMap[b]),
+    ...Object.keys(branchMap).filter(b => !projectBranchOrder.includes(b)),
+  ];
 
   const nav = document.getElementById('teknisiNav');
   nav.innerHTML = branches.map(branch => {
@@ -1212,9 +1223,15 @@ function buildSidebar() {
       const av = t.photo
         ? `<span class="sb-btn-avatar"><img src="${t.photo}" alt="${t.name}"></span>`
         : `<span class="sb-btn-avatar" style="background:${t.color}">${t.initials}</span>`;
+      const multiBadge = (t.branches && t.branches.length > 1)
+        ? `<span style="font-size:8px;background:rgba(245,197,24,.25);color:var(--accent);border-radius:3px;padding:1px 4px;margin-left:4px;" title="Aktif di: ${t.branches.join(', ')}">✦ ${t.branches.length} cabang</span>`
+        : '';
       return `<button class="sb-btn" data-gid="${t.gid}" onclick="selectTeknisi('${t.gid}')">
         ${av}
-        <span class="sb-btn-info"><span class="sb-btn-name">${t.name}</span></span>
+        <span class="sb-btn-info">
+          <span class="sb-btn-name">${t.name}</span>
+          ${multiBadge}
+        </span>
       </button>`;
     }).join('');
     return `<div class="sb-branch-group" id="bg-${branch.replace(/\s/g,'-')}">
