@@ -589,6 +589,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         </div>
         <p style="font-size:11px;color:#aaa;margin-bottom:14px;">Klik baris teknisi untuk melihat detail lengkap.</p>
 
+        <!-- Nota Masuk Hari Ini -->
+        <div style="margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
+            <div style="font-size:11px;font-weight:800;color:#1565c0;text-transform:uppercase;letter-spacing:.8px;">📋 Nota Masuk Hari Ini</div>
+            <span id="notaTotal" style="background:#1565c0;color:#fff;font-size:12px;font-weight:800;padding:3px 12px;border-radius:20px;cursor:pointer;" onclick="showNotaModal(null)" title="Lihat semua nota hari ini">⏳</span>
+            <span style="font-size:10px;color:#aaa;">total semua cabang · klik untuk detail</span>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #1565c0;background:#e3f2fd;cursor:pointer;" onclick="showNotaModal('Palembang')">
+              <div class="stat-lbl" style="color:#1565c0;">Palembang</div>
+              <div class="stat-val" style="color:#1565c0;font-size:28px;" id="notaCabang-Palembang">⏳</div>
+              <div class="stat-sub">nota hari ini · klik detail</div>
+            </div>
+            <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #1565c0;background:#e3f2fd;cursor:pointer;" onclick="showNotaModal('Depok')">
+              <div class="stat-lbl" style="color:#1565c0;">Depok</div>
+              <div class="stat-val" style="color:#1565c0;font-size:28px;" id="notaCabang-Depok">⏳</div>
+              <div class="stat-sub">nota hari ini · klik detail</div>
+            </div>
+            <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #1565c0;background:#e3f2fd;cursor:pointer;" onclick="showNotaModal('Lampung')">
+              <div class="stat-lbl" style="color:#1565c0;">Lampung</div>
+              <div class="stat-val" style="color:#1565c0;font-size:28px;" id="notaCabang-Lampung">⏳</div>
+              <div class="stat-sub">nota hari ini · klik detail</div>
+            </div>
+            <div class="stat" style="flex:1;min-width:120px;margin:0;border-top:3px solid #1565c0;background:#e3f2fd;cursor:pointer;" onclick="showNotaModal('Bekasi')">
+              <div class="stat-lbl" style="color:#1565c0;">Bekasi</div>
+              <div class="stat-val" style="color:#1565c0;font-size:28px;" id="notaCabang-Bekasi">⏳</div>
+              <div class="stat-sub">nota hari ini · klik detail</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Sparepart per Cabang -->
         <div style="margin-bottom:10px;">
           <div style="font-size:11px;font-weight:700;color:#e65100;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">🔧 Sparepart Belum Dipesan — per Cabang</div>
@@ -940,6 +971,75 @@ async function countProjectIssues() {
   const e2 = document.getElementById('mNoDeadline');
   if (e1) e1.textContent = noAssignee;
   if (e2) e2.textContent = noDeadline;
+}
+
+// ===================== NOTA MASUK HARI INI =====================
+let _notaHariIni = [];
+
+async function countNotaHariIni() {
+  _notaHariIni = [];
+  const counts = {};
+  Object.values(PROJECTS).forEach(cab => { counts[cab] = 0; });
+  const todayStart = new Date(); todayStart.setHours(0,0,0,0);
+  const sinceISO = todayStart.toISOString();
+  const today = todayStr();
+  await Promise.allSettled(Object.entries(PROJECTS).map(async ([pgid, cabangName]) => {
+    try {
+      let url = `${API}/tasks?project=${pgid}&created_since=${encodeURIComponent(sinceISO)}&opt_fields=gid,name,created_at,parent.gid&limit=100`;
+      let pages = 0;
+      while (url && pages < 5) {
+        const d = await apiFetch(url);
+        for (const t of (d.data || [])) {
+          if (t.parent && t.parent.gid) continue;
+          if (isoToLocalDate(t.created_at) !== today) continue;
+          counts[cabangName]++;
+          _notaHariIni.push({ gid: t.gid, name: t.name, cabang: cabangName, projectGid: pgid, created_at: t.created_at });
+        }
+        url = d.next_page?.uri || null; pages++;
+      }
+    } catch(e) {}
+  }));
+  const total = Object.values(counts).reduce((a,b) => a+b, 0);
+  const elTotal = document.getElementById('notaTotal');
+  if (elTotal) elTotal.textContent = total;
+  Object.entries(counts).forEach(([cab, n]) => {
+    const el = document.getElementById(`notaCabang-${cab}`);
+    if (el) el.textContent = n;
+  });
+}
+
+function showNotaModal(cabang) {
+  const list = cabang
+    ? _notaHariIni.filter(t => t.cabang === cabang)
+    : [..._notaHariIni].sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+  const modal = document.getElementById('issueModal');
+  const hdr   = document.getElementById('issueModalHdr');
+  document.getElementById('issueModalTitle').textContent = cabang
+    ? `📋 Nota Masuk Hari Ini — ${cabang}`
+    : '📋 Nota Masuk Hari Ini — Semua Cabang';
+  document.getElementById('issueModalSub').textContent  = `${list.length} nota masuk hari ini`;
+  document.getElementById('issueModalHint').textContent = 'teknisi / assignee';
+  hdr.style.background = '#1565c0';
+  const body = document.getElementById('issueModalBody');
+  if (!list.length) {
+    body.innerHTML = '<div class="empty">📭 Belum ada nota masuk hari ini</div>';
+  } else {
+    body.innerHTML = list.map(t => {
+      const asanaUrl = `https://app.asana.com/0/${t.projectGid}/${t.gid}/f`;
+      const timeStr  = t.created_at ? new Date(t.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}) : '';
+      return `<div style="display:flex;align-items:center;gap:8px;padding:7px 4px;border-bottom:1px solid #f5f5f5;">
+        <span style="font-size:10px;color:#888;width:36px;flex-shrink:0;">${timeStr}</span>
+        <a href="${asanaUrl}" target="_blank" rel="noopener"
+           style="flex:1;font-size:12px;font-weight:600;color:var(--txt);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"
+           title="${t.name}">${t.name}</a>
+        ${!cabang ? `<span style="font-size:10px;background:#e3f2fd;color:#1565c0;border-radius:4px;padding:2px 6px;flex-shrink:0;">${t.cabang}</span>` : ''}
+        <a href="${asanaUrl}" target="_blank" rel="noopener"
+           style="flex-shrink:0;font-size:10px;padding:3px 8px;background:#e3f2fd;color:#1565c0;border-radius:6px;text-decoration:none;font-weight:700;">Buka ↗</a>
+      </div>`;
+    }).join('');
+  }
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
 }
 
 // Tampilkan modal daftar task
@@ -1377,6 +1477,7 @@ async function enterBoard() {
   // Hitung metrics background (tidak blocking)
   countProjectIssues();
   countSparepartPerCabang();
+  countNotaHariIni();
 }
 
 function backToLanding() {
