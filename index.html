@@ -672,12 +672,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
               <th>🔧 Sparepart</th>
               <th>⏳ Belum Dikerjakan</th>
               <th>❌ Cancel</th>
+              <th>🔄 Garansi</th>
               <th>Task Rate</th>
               <th>KPI Score</th>
             </tr>
           </thead>
           <tbody id="ovBody">
-            <tr><td colspan="9" class="ov-loading"><span class="spinner dark"></span> Memuat overview...</td></tr>
+            <tr><td colspan="10" class="ov-loading"><span class="spinner dark"></span> Memuat overview...</td></tr>
           </tbody>
         </table>
         </div><!-- end scroll wrapper -->
@@ -771,6 +772,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
           <div class="stat-lbl" style="color:#757575;">❌ Dibatalkan</div>
           <div class="stat-val" style="color:#757575;" id="dCancel">—</div>
           <div class="stat-sub">klik untuk detail</div>
+        </div>
+        <div class="stat" style="flex:1;min-width:140px;margin:0;border-left:4px solid #e65100;background:#fff8f5;cursor:pointer;" onclick="showSelesaiModal('garansi')" title="Task garansi — tidak dihitung dalam fee">
+          <div class="stat-lbl" style="color:#e65100;">🔄 Garansi</div>
+          <div class="stat-val" style="color:#e65100;" id="dGaransi">—</div>
+          <div class="stat-sub">tidak termasuk fee · klik detail</div>
         </div>
       </div>
 
@@ -1107,6 +1113,7 @@ const _MODAL_CFG = {
   spare:   { title: '🔧 Menunggu Sparepart',            color: '#bf360c' },
   antrian: { title: '⏳ Belum Dikerjakan',              color: '#6a1b9a' },
   cancel:  { title: '❌ Task Dibatalkan',               color: '#616161' },
+  garansi: { title: '🔄 Task Garansi (tidak termasuk fee)', color: '#e65100' },
 };
 
 function showSelesaiModal(type) {
@@ -1276,6 +1283,10 @@ const ACTIVE_SECTIONS = {
 let SPAREPART_GIDS = new Set();
 let ANTRIAN_GIDS   = new Set();
 let CANCEL_GIDS    = new Set();
+
+// Tag GID "garansi" — task ini TIDAK dihitung dalam fee bulanan teknisi
+// Jika task garansi di section CANCEL → tetap masuk cancel (cancel prioritas)
+const GARANSI_TAG = '1213968947209530';
 
 let charts = {};
 let currentTeknisi = null;
@@ -1515,7 +1526,7 @@ async function fetchUserTasks(teknisiGid, completedSince, forceRefresh = false) 
     return cached.tasks;
   }
   const sinceParam = completedSince ? `&completed_since=${completedSince}` : '';
-  const BASE = `${API}/tasks?assignee=${teknisiGid}&workspace=${WORKSPACE}&opt_fields=name,completed,completed_at,due_on,created_at,modified_at,parent.gid,memberships.project.gid,memberships.section.gid&limit=100${sinceParam}`;
+  const BASE = `${API}/tasks?assignee=${teknisiGid}&workspace=${WORKSPACE}&opt_fields=name,completed,completed_at,due_on,created_at,modified_at,parent.gid,memberships.project.gid,memberships.section.gid,tags.gid&limit=100${sinceParam}`;
   let allTasks = [], nextOffset = null, page = 0;
   try {
     do {
@@ -1718,14 +1729,18 @@ async function loadOverview() {
     }
     // Filter subtask dari overview juga
     const tasks = (res.value || []).filter(t => !t.parent || !t.parent.gid);
-    const ovIsCancel = t => t.memberships && t.memberships.some(m => m.section && CANCEL_GIDS.has(m.section.gid));
-    const comM   = tasks.filter(t => t.completed && !ovIsCancel(t) && isoToLocalDate(t.completed_at) >= fd.from && isoToLocalDate(t.completed_at) <= fd.to).length;
-    const cancel = tasks.filter(t => ovIsCancel(t)).length;
-    const allInc = tasks.filter(t => !t.completed && !ovIsCancel(t));
-    const inc    = allInc.length;
-    const total  = comM + inc;
-    const rate   = total > 0 ? Math.round(comM / total * 100) : null;
-    // Section metrics
+    const ovIsCancel  = t => t.memberships && t.memberships.some(m => m.section && CANCEL_GIDS.has(m.section.gid));
+    // Garansi: punya tag garansi DAN bukan di cancel (cancel prioritas)
+    const ovIsGaransi = t => !ovIsCancel(t) && t.tags && t.tags.some(tg => tg.gid === GARANSI_TAG);
+    // comM & inc hanya menghitung task NORMAL (tidak termasuk garansi & cancel) — ini dasar fee
+    const comM    = tasks.filter(t => t.completed && !ovIsCancel(t) && !ovIsGaransi(t) && isoToLocalDate(t.completed_at) >= fd.from && isoToLocalDate(t.completed_at) <= fd.to).length;
+    const cancel  = tasks.filter(t => ovIsCancel(t)).length;
+    const garansi = tasks.filter(t => ovIsGaransi(t)).length;
+    const allInc  = tasks.filter(t => !t.completed && !ovIsCancel(t) && !ovIsGaransi(t));
+    const inc     = allInc.length;
+    const total   = comM + inc;
+    const rate    = total > 0 ? Math.round(comM / total * 100) : null;
+    // Section metrics (dari task normal saja)
     const spare   = allInc.filter(t => t.memberships && t.memberships.some(m => m.section && SPAREPART_GIDS.has(m.section.gid))).length;
     const antrian = allInc.filter(t => t.memberships && t.memberships.some(m => m.section && ANTRIAN_GIDS.has(m.section.gid))).length;
 
@@ -1737,6 +1752,7 @@ async function loadOverview() {
       <td style="color:#e65100;font-weight:700;">${spare || '—'}</td>
       <td style="color:#6a1b9a;font-weight:700;">${antrian || '—'}</td>
       <td style="color:#757575;font-weight:700;">${cancel || '—'}</td>
+      <td style="color:#e65100;font-weight:700;">${garansi || '—'}</td>
       <td style="font-weight:700;">${rate !== null ? rate+'%' : '—'}</td>
       <td>${kpiPill(rate)}</td>
     </tr>`;
@@ -1974,7 +1990,7 @@ async function init() {
 
   ['lateArea','overdArea','recoArea','oldestArea','newArea'].forEach(id =>
     document.getElementById(id).innerHTML = '<div class="loading">⏳</div>');
-  ['dInc','dCom','dRate','dNew','mCom','mRem','mAvg','mStale','scorePct','scoreName'].forEach(id =>
+  ['dInc','dCom','dRate','dNew','mCom','mRem','mAvg','mStale','dGaransi','scorePct','scoreName'].forEach(id =>
     document.getElementById(id).textContent = '—');
 
   try {
@@ -2012,19 +2028,24 @@ async function init() {
 
     // Helper: task di section cancel (completed atau tidak)
     const isCancel = t => t.memberships && t.memberships.some(m => m.section && CANCEL_GIDS.has(m.section.gid));
+    // Helper: task garansi = punya tag GARANSI_TAG DAN BUKAN di cancel (cancel prioritas)
+    const isGaransi = t => !isCancel(t) && t.tags && t.tags.some(tg => tg.gid === GARANSI_TAG);
 
-    // Cancel count = semua task di section cancel (biasanya completed=true di Asana)
-    const cancelCount = allTasks.filter(t => !t.parent && isCancel(t)).length;
+    // Cancel count = semua task di section cancel
+    const cancelCount  = allTasks.filter(t => !t.parent && isCancel(t)).length;
+    // Garansi count = semua task garansi (completed + incomplete, tidak di cancel)
+    const garansiTasks = allTasks.filter(t => !t.parent && isGaransi(t));
+    const garansiCount = garansiTasks.length;
 
-    // Pisahkan cancel dari incomplete juga (jaga-jaga ada yang completed=false di cancel)
-    incomplete = incomplete.filter(t => !isCancel(t));
-    dbg.innerHTML += ` | cancel=${cancelCount}`;
+    // Pisahkan cancel & garansi dari incomplete (garansi dikerjakan secara terpisah)
+    incomplete = incomplete.filter(t => !isCancel(t) && !isGaransi(t));
+    dbg.innerHTML += ` | cancel=${cancelCount} garansi=${garansiCount}`;
 
-    // Filter by selected period (dfd = detail filter dates)
-    // completedOnDay  = selesai tepat pada end date (hari itu saja) — EXCLUDE cancel
-    // completedPeriod = kumulatif dari firstM s/d end date — EXCLUDE cancel
-    const completedOnDay  = allTasks.filter(t => t.completed && !isCancel(t) && isoToLocalDate(t.completed_at) === dfd.to);
-    const completedPeriod = allTasks.filter(t => t.completed && !isCancel(t) && isoToLocalDate(t.completed_at) >= dfd.from && isoToLocalDate(t.completed_at) <= dfd.to);
+    // Filter by selected period — EXCLUDE cancel & garansi (dasar perhitungan fee)
+    // completedOnDay  = selesai tepat pada end date (hari itu saja)
+    // completedPeriod = kumulatif dari firstM s/d end date
+    const completedOnDay  = allTasks.filter(t => t.completed && !isCancel(t) && !isGaransi(t) && isoToLocalDate(t.completed_at) === dfd.to);
+    const completedPeriod = allTasks.filter(t => t.completed && !isCancel(t) && !isGaransi(t) && isoToLocalDate(t.completed_at) >= dfd.from && isoToLocalDate(t.completed_at) <= dfd.to);
     // Simpan untuk task list modal
     const _pgid  = t => (t.memberships && t.memberships[0] && t.memberships[0].project) ? t.memberships[0].project.gid : '';
     const _mt    = (t, meta) => ({ gid: t.gid, name: t.name, projectGid: _pgid(t), meta });
@@ -2037,11 +2058,14 @@ async function init() {
     _taskStore.spare   = incomplete.filter(t => t.memberships && t.memberships.some(m => m.section && SPAREPART_GIDS.has(m.section.gid))).map(t => _mt(t, t.due_on ? '📅 ' + t.due_on : ''));
     _taskStore.antrian = incomplete.filter(t => t.memberships && t.memberships.some(m => m.section && ANTRIAN_GIDS.has(m.section.gid))).map(t => _mt(t, t.due_on ? '📅 ' + t.due_on : ''));
     _taskStore.cancel  = allTasks.filter(t => isCancel(t)).map(t => _mt(t, ''));
+    // Garansi store — semua task garansi (completed diberi keterangan tanggal, pending diberi label)
+    _taskStore.garansi = garansiTasks.map(t => _mt(t, t.completed ? '✅ ' + isoToLocalDate(t.completed_at) : '🔄 pending'));
+    document.getElementById('dGaransi').textContent = garansiCount || '0';
     // newPeriod selalu hari ini saja (bukan range period) — section ini khusus task masuk hari ini
     const _today          = todayStr();
     const newPeriod       = allTasks.filter(t => !t.parent && isoToLocalDate(t.created_at) === _today);
     _taskStore.new    = newPeriod.map(t  => _mt(t, '🕐 ' + isoToLocalDate(t.created_at)));
-    const completed6mo    = allTasks.filter(t => t.completed && !isCancel(t) && isoToLocalDate(t.completed_at) >= sixAgo);
+    const completed6mo    = allTasks.filter(t => t.completed && !isCancel(t) && !isGaransi(t) && isoToLocalDate(t.completed_at) >= sixAgo);
 
     // Days in selected range (for avg calculation)
     const msPerDay  = 86400000;
